@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "weitithesisguide-mobile",
-    "slug": "weitithesisguide-mobile",
-    "version": "1.0.0",
-    "orientation": "portrait",
+    "name": "WEiTI-Thesis-Guide",
+    "slug": "weiti-thesis-guide",
+    "version": "0.0.0",
+    "orientation": "default",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
@@ -14,9 +14,7 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true
     },
