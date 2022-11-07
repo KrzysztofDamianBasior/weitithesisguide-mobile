@@ -15,7 +15,7 @@ const Forum = ({
       <Button
         icon="camera"
         mode="contained"
-        onPress={() => navigation.navigate("HomeTabs")}
+        onPress={() => navigation.navigate("HomeTabs", { screen: "Home" })}
       >
         Home
       </Button>

@@ -38,7 +38,7 @@ const Quiz = ({
       <Button
         icon="camera"
         mode="contained"
-        onPress={() => navigation.navigate("HomeTabs")}
+        onPress={() => navigation.navigate("HomeTabs", { screen: "Home" })}
       >
         home
       </Button>
