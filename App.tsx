@@ -5,6 +5,8 @@ import { NavigationContainer } from "@react-navigation/native";
 
 import { Provider as PaperProvider } from "react-native-paper";
 
+import type { StackScreenProps } from "@react-navigation/stack";
+
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
@@ -18,6 +20,7 @@ import Account from "./features/Account";
 import Settings from "./features/Settings";
 
 import { CoreStack } from "./navigation/CoreStack";
+import type { CoreStackParamList } from "./navigation/CoreStack";
 import { BottomTabs } from "./navigation/BottomTabs";
 
 export default function App() {
@@ -44,7 +47,10 @@ export default function App() {
   );
 }
 
-function HomeTabs() {
+function HomeTabs({
+  navigation,
+  route,
+}: StackScreenProps<CoreStackParamList, "HomeTabs">) {
   return (
     <BottomTabs.Navigator
       initialRouteName="Home"

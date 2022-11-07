@@ -3,14 +3,21 @@ import { StyleSheet, Text, View } from "react-native";
 import type { CoreStackParamList } from "../../navigation/CoreStack";
 import type { StackScreenProps } from "@react-navigation/stack";
 
-import { Button } from "react-native-paper";
+import type { CompositeScreenProps } from "@react-navigation/native";
+import type { CompositeNavigationProp } from "@react-navigation/native";
 
-type Props = {};
+import type { BottomTabsParamList } from "../../navigation/BottomTabs";
+import type { MaterialBottomTabScreenProps } from "@react-navigation/material-bottom-tabs";
+
+import { Button } from "react-native-paper";
 
 const Home = ({
   navigation,
   route,
-}: StackScreenProps<CoreStackParamList, "HomeTabs">) => {
+}: CompositeScreenProps<
+  MaterialBottomTabScreenProps<BottomTabsParamList, "Home">,
+  StackScreenProps<CoreStackParamList>
+>) => {
   return (
     <View>
       <Text>home</Text>

@@ -1,7 +1,9 @@
 import { createStackNavigator } from "@react-navigation/stack";
+import { NavigatorScreenParams } from "@react-navigation/native";
+import { BottomTabsParamList } from "./BottomTabs";
 
 export type CoreStackParamList = {
-  HomeTabs: undefined;
+  HomeTabs: NavigatorScreenParams<BottomTabsParamList>;
   Quiz: undefined;
   Guide: undefined;
   Forum: undefined;
