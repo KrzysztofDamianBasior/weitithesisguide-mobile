@@ -9,6 +9,16 @@ import type { CompositeNavigationProp } from "@react-navigation/native";
 import type { BottomTabsParamList } from "../../navigation/BottomTabs";
 import type { MaterialBottomTabScreenProps } from "@react-navigation/material-bottom-tabs";
 
+import {
+  useTheme,
+  Avatar,
+  Title,
+  Caption,
+  Paragraph,
+  Drawer,
+  TouchableRipple,
+  Switch,
+} from "react-native-paper";
 import { Button } from "react-native-paper";
 
 const Home = ({
@@ -18,13 +28,16 @@ const Home = ({
   MaterialBottomTabScreenProps<BottomTabsParamList, "Home">,
   StackScreenProps<CoreStackParamList>
 >) => {
+  const paperTheme = useTheme();
   return (
     <View>
       <Text>home</Text>
       <Button
         icon="camera"
-        mode="contained"
+        mode="outlined"
         onPress={() => navigation.navigate("Forum")}
+        color={paperTheme.colors.text}
+        // type="outlined"
       >
         Forum
       </Button>

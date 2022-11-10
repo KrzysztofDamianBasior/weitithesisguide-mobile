@@ -1,6 +1,6 @@
 import "react-native-gesture-handler";
+import React, { useContext, useState } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 
 import { Provider as PaperProvider } from "react-native-paper";
@@ -23,27 +23,78 @@ import { CoreStack } from "./navigation/CoreStack";
 import type { CoreStackParamList } from "./navigation/CoreStack";
 import { BottomTabs } from "./navigation/BottomTabs";
 
+import {
+  DarkTheme as NavigationDarkTheme,
+  DefaultTheme as NavigationDefaultTheme,
+} from "@react-navigation/native";
+import {
+  DarkTheme as PaperDarkTheme,
+  DefaultTheme as PaperDefaultTheme,
+} from "react-native-paper";
+import merge from "deepmerge";
+
+const CombinedDefaultTheme = merge(PaperDefaultTheme, NavigationDefaultTheme);
+const CombinedDarkTheme = merge(PaperDarkTheme, NavigationDarkTheme);
+
+import {
+  useTheme,
+  Avatar,
+  Title,
+  Caption,
+  Paragraph,
+  Drawer,
+  TouchableRipple,
+  Switch,
+} from "react-native-paper";
+
+const ThemeContext = React.createContext<{
+  toggleTheme: () => void;
+  isThemeDark: boolean;
+}>({
+  toggleTheme: () => {},
+  isThemeDark: true,
+});
+
 export default function App() {
+  const [isThemeDark, setIsThemeDark] = React.useState<boolean>(true);
+  let theme = isThemeDark ? CombinedDarkTheme : CombinedDefaultTheme;
+  const toggleTheme = React.useCallback(() => {
+    return setIsThemeDark(!isThemeDark);
+  }, [isThemeDark]);
+
+  const preferences = React.useMemo(
+    () => ({
+      toggleTheme,
+      isThemeDark,
+    }),
+    [toggleTheme, isThemeDark]
+  );
+
   return (
-    <PaperProvider>
-      <NavigationContainer>
-        <CoreStack.Navigator initialRouteName="HomeTabs">
-          <CoreStack.Screen
-            name="HomeTabs"
-            component={HomeTabs}
-            options={{ headerShown: false }}
-          />
-          <CoreStack.Screen name="Quiz" component={Quiz} />
-          <CoreStack.Screen
-            name="Guide"
-            component={Guide}
-            options={{ headerShown: false }}
-          />
-          <CoreStack.Screen name="Forum" component={Forum} />
-          <CoreStack.Screen name="Links" component={Links} />
-        </CoreStack.Navigator>
-      </NavigationContainer>
-    </PaperProvider>
+    <ThemeContext.Provider value={preferences}>
+      <PaperProvider theme={theme}>
+        <NavigationContainer theme={theme}>
+          <StatusBar style={isThemeDark ? "light" : "dark"} />
+          <CoreStack.Navigator initialRouteName="HomeTabs">
+            <CoreStack.Screen
+              name="HomeTabs"
+              component={HomeTabs}
+              options={{ headerShown: false }}
+            />
+            <CoreStack.Screen name="Quiz" component={Quiz} />
+            <CoreStack.Screen
+              name="Guide"
+              component={Guide}
+              options={{ headerShown: false }}
+            />
+            <CoreStack.Screen name="Forum" component={Forum} />
+            <CoreStack.Screen name="Links" component={Links} />
+          </CoreStack.Navigator>
+        </NavigationContainer>
+
+        <Switch value={isThemeDark} onValueChange={() => toggleTheme()} />
+      </PaperProvider>
+    </ThemeContext.Provider>
   );
 }
 
@@ -54,9 +105,9 @@ function HomeTabs({
   return (
     <BottomTabs.Navigator
       initialRouteName="Home"
-      activeColor="#f0edf6"
-      inactiveColor="#3e2465"
-      barStyle={{ backgroundColor: "#694fad" }}
+      // activeColor="#f0edf6"
+      // inactiveColor="#3e2465"
+      // barStyle={{ backgroundColor: "#694fad" }}
     >
       <BottomTabs.Screen
         name="Home"
@@ -133,12 +184,3 @@ function HomeTabs({
     </BottomTabs.Navigator>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
