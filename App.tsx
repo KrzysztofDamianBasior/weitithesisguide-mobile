@@ -19,6 +19,8 @@ import Notes from "./features/Notes";
 import Account from "./features/Account";
 import Settings from "./features/Settings";
 
+import QuizHeader from "./features/Quiz/QuizHeader";
+
 import { CoreStack } from "./navigation/CoreStack";
 import type { CoreStackParamList } from "./navigation/CoreStack";
 import { BottomTabs } from "./navigation/BottomTabs";
@@ -81,7 +83,16 @@ export default function App() {
               component={HomeTabs}
               options={{ headerShown: false }}
             />
-            <CoreStack.Screen name="Quiz" component={Quiz} />
+            <CoreStack.Screen
+              name="Quiz"
+              component={Quiz}
+              // screenOptions={{
+              //   header: QuizHeader,
+              // }}
+              options={({ route }) => ({
+                header: (props) => <QuizHeader {...props} />,
+              })}
+            />
             <CoreStack.Screen
               name="Guide"
               component={Guide}
