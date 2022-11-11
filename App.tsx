@@ -20,6 +20,7 @@ import Account from "./features/Account";
 import Settings from "./features/Settings";
 
 import QuizHeader from "./features/Quiz/QuizHeader";
+import GuideTableOfContentsHeader from "./features/Guide/GuideTableOfContentsHeader";
 
 import { CoreStack } from "./navigation/CoreStack";
 import type { CoreStackParamList } from "./navigation/CoreStack";
@@ -86,9 +87,6 @@ export default function App() {
             <CoreStack.Screen
               name="Quiz"
               component={Quiz}
-              // screenOptions={{
-              //   header: QuizHeader,
-              // }}
               options={({ route }) => ({
                 header: (props) => <QuizHeader {...props} />,
               })}
@@ -96,6 +94,9 @@ export default function App() {
             <CoreStack.Screen
               name="Guide"
               component={Guide}
+              // options={({ route }) => ({
+              //   header: (props) => <GuideTableOfContentsHeader {...props} />,
+              // })}
               options={{ headerShown: false }}
             />
             <CoreStack.Screen name="Forum" component={Forum} />

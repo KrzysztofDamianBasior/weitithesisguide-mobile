@@ -7,7 +7,8 @@ import type { StackScreenProps } from "@react-navigation/stack";
 
 import { Button } from "react-native-paper";
 
-type Props = {};
+import GuideChapterHeader from "./GuideChapterHeader";
+import GuideTableOfContentsHeader from "./GuideTableOfContentsHeader";
 
 const Guide = ({
   navigation,
@@ -15,8 +16,21 @@ const Guide = ({
 }: StackScreenProps<CoreStackParamList, "Guide">) => {
   return (
     <GuideStack.Navigator>
-      <GuideStack.Screen name="TableOfContents" component={Guide1} />
-      <GuideStack.Screen name="Chapter" component={Guide2} />
+      <GuideStack.Screen
+        name="TableOfContents"
+        component={Guide1}
+        // options={{ headerShown: false }}
+        options={({ route }) => ({
+          header: (props) => <GuideTableOfContentsHeader {...props} />,
+        })}
+      />
+      <GuideStack.Screen
+        name="Chapter"
+        component={Guide2}
+        options={({ route }) => ({
+          header: (props) => <GuideChapterHeader {...props} />,
+        })}
+      />
     </GuideStack.Navigator>
   );
 };
@@ -34,7 +48,7 @@ function Guide1({
       <Button
         icon="camera"
         mode="contained"
-        onPress={() => navigation.navigate("Chapter")}
+        onPress={() => navigation.navigate("Chapter", { chapterNumber: 1 })}
       >
         Chapter
       </Button>
