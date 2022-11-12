@@ -12,7 +12,7 @@ const Account = ({
   navigation,
 }: MaterialBottomTabScreenProps<BottomTabsParamList, "Account">) => {
   return (
-    <View>
+    <View style={{ backgroundColor: "transparent", flex: 1 }}>
       <Text>profile</Text>
       <Button
         icon="camera"

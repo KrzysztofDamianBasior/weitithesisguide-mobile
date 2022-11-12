@@ -10,7 +10,7 @@ const Settings = ({
   navigation,
 }: MaterialBottomTabScreenProps<BottomTabsParamList, "Settings">) => {
   return (
-    <View>
+    <View style={{ backgroundColor: "transparent", flex: 1 }}>
       <Text>Settings</Text>
     </View>
   );

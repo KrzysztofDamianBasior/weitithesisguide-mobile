@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, ImageBackground } from "react-native";
 import type { CoreStackParamList } from "../../navigation/CoreStack";
 import type { StackScreenProps } from "@react-navigation/stack";
 
@@ -20,6 +20,9 @@ import {
   Switch,
 } from "react-native-paper";
 import { Button } from "react-native-paper";
+
+import BackgroundDark from "../../assets/background-dark.jpg";
+// import BackgroundLight from "./assets/background-light.jpg";
 
 const Home = ({
   navigation,
