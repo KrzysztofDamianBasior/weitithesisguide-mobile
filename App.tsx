@@ -33,41 +33,10 @@ import type { CoreStackParamList } from "./navigation/CoreStack";
 import { BottomTabs } from "./navigation/BottomTabs";
 
 import {
-  DarkTheme as NavigationDarkTheme,
-  DefaultTheme as NavigationDefaultTheme,
-} from "@react-navigation/native";
-import {
-  DarkTheme as PaperDarkTheme,
-  DefaultTheme as PaperDefaultTheme,
-} from "react-native-paper";
-import merge from "deepmerge";
-
-const CombinedDefaultTheme = merge(
-  merge(PaperDefaultTheme, NavigationDefaultTheme),
-  { colors: { ...PaperDefaultTheme.colors, background: "transparent" } }
-);
-const CombinedDarkTheme = merge(merge(PaperDarkTheme, NavigationDarkTheme), {
-  colors: { ...PaperDefaultTheme.colors, background: "transparent" },
-});
-
-import {
-  useTheme,
-  Avatar,
-  Title,
-  Caption,
-  Paragraph,
-  Drawer,
-  TouchableRipple,
-  Switch,
-} from "react-native-paper";
-
-const ThemeContext = React.createContext<{
-  toggleTheme: () => void;
-  isThemeDark: boolean;
-}>({
-  toggleTheme: () => {},
-  isThemeDark: true,
-});
+  CombinedDarkTheme,
+  CombinedDefaultTheme,
+  ThemeContext,
+} from "./shared/context/ThemeContext";
 
 export default function App() {
   const [isThemeDark, setIsThemeDark] = React.useState<boolean>(true);
@@ -128,8 +97,8 @@ export default function App() {
               <CoreStack.Screen name="Links" component={Links} />
             </CoreStack.Navigator>
           </NavigationContainer>
-
-          <Switch value={isThemeDark} onValueChange={() => toggleTheme()} />
+          {/* 
+          <Switch value={isThemeDark} onValueChange={() => toggleTheme()} /> */}
         </PaperProvider>
       </ThemeContext.Provider>
     </ImageBackground>
@@ -141,12 +110,7 @@ function HomeTabs({
   route,
 }: StackScreenProps<CoreStackParamList, "HomeTabs">) {
   return (
-    <BottomTabs.Navigator
-      initialRouteName="Home"
-      // activeColor="#f0edf6"
-      // inactiveColor="#3e2465"
-      // barStyle={{ backgroundColor: "#694fad" }}
-    >
+    <BottomTabs.Navigator initialRouteName="Home">
       <BottomTabs.Screen
         name="Home"
         component={Home}
