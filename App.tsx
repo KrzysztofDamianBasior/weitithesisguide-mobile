@@ -1,18 +1,14 @@
 import "react-native-gesture-handler";
-import React, { useContext, useState } from "react";
+import { ImageBackground } from "react-native";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import React from "react";
 import { StatusBar } from "expo-status-bar";
-import { NavigationContainer } from "@react-navigation/native";
-
 import { Provider as PaperProvider } from "react-native-paper";
-
-import type { StackScreenProps } from "@react-navigation/stack";
 
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
-
 import BackgroundDark from "./assets/background-dark.jpg";
 import BackgroundLight from "./assets/background-light.jpg";
-import logo from "./assets/logo.png";
 
 import Forum from "./features/Forum";
 import Guide from "./features/Guide";
@@ -22,12 +18,10 @@ import Links from "./features/Links";
 import Notes from "./features/Notes";
 import Account from "./features/Account";
 import Settings from "./features/Settings";
+import QuizHeader from "./features/Quiz/components/QuizHeader";
 
-import { ImageBackground, StyleSheet } from "react-native";
-
-import QuizHeader from "./features/Quiz/QuizHeader";
-import GuideTableOfContentsHeader from "./features/Guide/GuideTableOfContentsHeader";
-
+import { NavigationContainer } from "@react-navigation/native";
+import type { StackScreenProps } from "@react-navigation/stack";
 import { CoreStack } from "./navigation/CoreStack";
 import type { CoreStackParamList } from "./navigation/CoreStack";
 import { BottomTabs } from "./navigation/BottomTabs";
@@ -54,54 +48,53 @@ export default function App() {
   );
 
   return (
-    <ImageBackground
-      source={isThemeDark ? BackgroundDark : BackgroundLight}
-      resizeMode="cover"
-      style={{
-        flex: 1,
-        justifyContent: "center",
-      }}
-    >
-      <ThemeContext.Provider value={preferences}>
-        <PaperProvider theme={theme}>
-          <NavigationContainer theme={theme}>
-            <StatusBar style={isThemeDark ? "light" : "dark"} />
-            <CoreStack.Navigator
-              initialRouteName="HomeTabs"
-              screenOptions={{ cardStyle: { backgroundColor: "transparent" } }}
-            >
-              <CoreStack.Screen
-                name="HomeTabs"
-                component={HomeTabs}
-                options={{
-                  headerShown: false,
+    <SafeAreaProvider>
+      <ImageBackground
+        source={isThemeDark ? BackgroundDark : BackgroundLight}
+        resizeMode="cover"
+        style={{
+          flex: 1,
+          justifyContent: "center",
+        }}
+      >
+        <StatusBar style={isThemeDark ? "light" : "dark"} />
+        <ThemeContext.Provider value={preferences}>
+          <PaperProvider theme={theme}>
+            <NavigationContainer theme={theme}>
+              <CoreStack.Navigator
+                initialRouteName="HomeTabs"
+                screenOptions={{
                   cardStyle: { backgroundColor: "transparent" },
                 }}
-              />
-              <CoreStack.Screen
-                name="Quiz"
-                component={Quiz}
-                options={({ route }) => ({
-                  header: (props) => <QuizHeader {...props} />,
-                })}
-              />
-              <CoreStack.Screen
-                name="Guide"
-                component={Guide}
-                // options={({ route }) => ({
-                //   header: (props) => <GuideTableOfContentsHeader {...props} />,
-                // })}
-                options={{ headerShown: false }}
-              />
-              <CoreStack.Screen name="Forum" component={Forum} />
-              <CoreStack.Screen name="Links" component={Links} />
-            </CoreStack.Navigator>
-          </NavigationContainer>
-          {/* 
-          <Switch value={isThemeDark} onValueChange={() => toggleTheme()} /> */}
-        </PaperProvider>
-      </ThemeContext.Provider>
-    </ImageBackground>
+              >
+                <CoreStack.Screen
+                  name="HomeTabs"
+                  component={HomeTabs}
+                  options={{
+                    headerShown: false,
+                    cardStyle: { backgroundColor: "transparent" },
+                  }}
+                />
+                <CoreStack.Screen
+                  name="Quiz"
+                  component={Quiz}
+                  options={({ route }) => ({
+                    header: (props) => <QuizHeader {...props} />,
+                  })}
+                />
+                <CoreStack.Screen
+                  name="Guide"
+                  component={Guide}
+                  options={{ headerShown: false }}
+                />
+                <CoreStack.Screen name="Forum" component={Forum} />
+                <CoreStack.Screen name="Links" component={Links} />
+              </CoreStack.Navigator>
+            </NavigationContainer>
+          </PaperProvider>
+        </ThemeContext.Provider>
+      </ImageBackground>
+    </SafeAreaProvider>
   );
 }
 

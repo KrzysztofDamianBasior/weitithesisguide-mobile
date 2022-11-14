@@ -4,7 +4,7 @@ import React, { useContext } from "react";
 import { Appbar, useTheme } from "react-native-paper";
 import { StackHeaderProps } from "@react-navigation/stack";
 
-import { ThemeContext } from "../../shared/context/ThemeContext";
+import { ThemeContext } from "../../../shared/context/ThemeContext";
 
 const QuizHeader = ({ navigation, route, options, back }: StackHeaderProps) => {
   const theme = useTheme();
