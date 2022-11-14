@@ -1,8 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { GuideStack } from "../../navigation/GuideStack";
-import type { GuideStackParamList } from "../../navigation/GuideStack";
-import type { CoreStackParamList } from "../../navigation/CoreStack";
+import { GuideStack } from "../../shared/navigation/GuideStack";
+import type { GuideStackParamList } from "../../shared/navigation/GuideStack";
+import type { CoreStackParamList } from "../../shared/navigation/CoreStack";
 import type { StackScreenProps } from "@react-navigation/stack";
 
 import { Button } from "react-native-paper";

@@ -13,7 +13,7 @@ import { QuizContext } from "../quizContext";
 import { findQuizResult } from "../utils/findQuizResult";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { CoreStackParamList } from "../../../navigation/CoreStack";
+import { CoreStackParamList } from "../../../shared/navigation/CoreStack";
 
 const Farwell = () => {
   const theme = useTheme();

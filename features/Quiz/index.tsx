@@ -1,7 +1,7 @@
 import React, { useReducer } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-import type { CoreStackParamList } from "../../navigation/CoreStack";
+import type { CoreStackParamList } from "../../shared/navigation/CoreStack";
 import type { StackScreenProps } from "@react-navigation/stack";
 
 import { QuizContext } from "./quizContext";

@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import type { BottomTabsParamList } from "../../navigation/BottomTabs";
+import type { BottomTabsParamList } from "../../shared/navigation/BottomTabs";
 import type { MaterialBottomTabScreenProps } from "@react-navigation/material-bottom-tabs";
 
 type Props = {};

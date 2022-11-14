@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import type { CoreStackParamList } from "../../navigation/CoreStack";
+import type { CoreStackParamList } from "../../shared/navigation/CoreStack";
 import type { StackScreenProps } from "@react-navigation/stack";
 import { Button } from "react-native-paper";
 type Props = {};

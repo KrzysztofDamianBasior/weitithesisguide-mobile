@@ -1,12 +1,12 @@
 import React from "react";
 import { StyleSheet, Text, View, ImageBackground } from "react-native";
-import type { CoreStackParamList } from "../../navigation/CoreStack";
+import type { CoreStackParamList } from "../../shared/navigation/CoreStack";
 import type { StackScreenProps } from "@react-navigation/stack";
 
 import type { CompositeScreenProps } from "@react-navigation/native";
 import type { CompositeNavigationProp } from "@react-navigation/native";
 
-import type { BottomTabsParamList } from "../../navigation/BottomTabs";
+import type { BottomTabsParamList } from "../../shared/navigation/BottomTabs";
 import type { MaterialBottomTabScreenProps } from "@react-navigation/material-bottom-tabs";
 
 import {

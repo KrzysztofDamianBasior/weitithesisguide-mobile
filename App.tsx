@@ -22,9 +22,9 @@ import QuizHeader from "./features/Quiz/components/QuizHeader";
 
 import { NavigationContainer } from "@react-navigation/native";
 import type { StackScreenProps } from "@react-navigation/stack";
-import { CoreStack } from "./navigation/CoreStack";
-import type { CoreStackParamList } from "./navigation/CoreStack";
-import { BottomTabs } from "./navigation/BottomTabs";
+import { CoreStack } from "./shared/navigation/CoreStack";
+import type { CoreStackParamList } from "./shared/navigation/CoreStack";
+import { BottomTabs } from "./shared/navigation/BottomTabs";
 
 import {
   CombinedDarkTheme,
