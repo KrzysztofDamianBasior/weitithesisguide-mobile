@@ -4,7 +4,7 @@ import React from "react";
 import { Appbar, useTheme } from "react-native-paper";
 import { StackHeaderProps } from "@react-navigation/stack";
 
-import { GuideStackParamList } from "../../shared/navigation/GuideStack";
+import { GuideStackParamList } from "../../../shared/navigation/GuideStack";
 
 const GuideChapterHeader = ({
   navigation,

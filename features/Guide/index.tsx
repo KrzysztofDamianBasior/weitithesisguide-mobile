@@ -1,14 +1,17 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { Button } from "react-native-paper";
+
 import { GuideStack } from "../../shared/navigation/GuideStack";
 import type { GuideStackParamList } from "../../shared/navigation/GuideStack";
 import type { CoreStackParamList } from "../../shared/navigation/CoreStack";
 import type { StackScreenProps } from "@react-navigation/stack";
 
-import { Button } from "react-native-paper";
+import GuideChapterHeader from "./components/GuideChapterHeader";
+import GuideTableOfContentsHeader from "./components/GuideTableOfContentsHeader";
 
-import GuideChapterHeader from "./GuideChapterHeader";
-import GuideTableOfContentsHeader from "./GuideTableOfContentsHeader";
+import Chapter from "./screens/Chapter";
+import TableOfContents from "./screens/TableOfContents";
 
 const Guide = ({
   navigation,
@@ -18,15 +21,14 @@ const Guide = ({
     <GuideStack.Navigator>
       <GuideStack.Screen
         name="TableOfContents"
-        component={Guide1}
-        // options={{ headerShown: false }}
+        component={TableOfContents}
         options={({ route }) => ({
           header: (props) => <GuideTableOfContentsHeader {...props} />,
         })}
       />
       <GuideStack.Screen
         name="Chapter"
-        component={Guide2}
+        component={Chapter}
         options={({ route }) => ({
           header: (props) => <GuideChapterHeader {...props} />,
         })}
@@ -36,38 +38,3 @@ const Guide = ({
 };
 
 export default Guide;
-
-const styles = StyleSheet.create({});
-
-function Guide1({
-  navigation,
-  route,
-}: StackScreenProps<GuideStackParamList, "TableOfContents">) {
-  return (
-    <View>
-      <Button
-        icon="camera"
-        mode="contained"
-        onPress={() => navigation.navigate("Chapter", { chapterNumber: 1 })}
-      >
-        Chapter
-      </Button>
-    </View>
-  );
-}
-function Guide2({
-  navigation,
-  route,
-}: StackScreenProps<GuideStackParamList, "Chapter">) {
-  return (
-    <View>
-      <Button
-        icon="camera"
-        mode="contained"
-        onPress={() => navigation.navigate("TableOfContents")}
-      >
-        Table of contents
-      </Button>
-    </View>
-  );
-}
