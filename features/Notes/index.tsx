@@ -4,10 +4,18 @@ import React from "react";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { NotesTab } from "../../shared/navigation/NotesTabs";
+import type { NotesTabsParamList } from "../../shared/navigation/NotesTabs";
 import type { BottomTabsParamList } from "../../shared/navigation/BottomTabs";
 import type { MaterialBottomTabScreenProps } from "@react-navigation/material-bottom-tabs";
+import type { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
+import type { StackScreenProps } from "@react-navigation/stack";
+import { NotesStack } from "./navigation/NotesStack";
+import type { NotesStackParamList } from "./navigation/NotesStack";
+import { AnimatedFAB } from "react-native-paper";
 
-type Props = {};
+import Note from "./screens/Note";
+import DeviceNotes from "./screens/DeviceNotes";
+import CloudNotes from "./screens/CloudNotes";
 
 const Notes = ({
   route,
@@ -17,7 +25,7 @@ const Notes = ({
     <NotesTab.Navigator initialRouteName="DeviceNotes">
       <NotesTab.Screen
         name="DeviceNotes"
-        component={DeviceNotes}
+        component={DeviceNotesStack}
         options={{
           tabBarAccessibilityLabel: "notes stored in your device",
           tabBarLabel: "Device Notes",
@@ -32,9 +40,9 @@ const Notes = ({
       />
       <NotesTab.Screen
         name="CloudNotes"
-        component={CloudNotes}
+        component={CloudNotesStack}
         options={{
-          tabBarAccessibilityLabel: "notes stored in cloud",
+          tabBarAccessibilityLabel: "notes stored in a cloud",
           tabBarLabel: "Cloud Notes",
           tabBarIcon: ({ focused, color }) => {
             return focused === true ? (
@@ -55,20 +63,44 @@ const Notes = ({
 
 export default Notes;
 
-const styles = StyleSheet.create({});
-
-const CloudNotes = () => {
+const CloudNotesStack = ({
+  navigation,
+  route,
+}: MaterialTopTabScreenProps<NotesTabsParamList>) => {
   return (
-    <View>
-      <Text>Cloud Notes</Text>
-    </View>
+    <NotesStack.Navigator initialRouteName="AllNotes">
+      <NotesStack.Screen
+        name="AllNotes"
+        component={CloudNotes}
+        // options={{ headerShown: false }}
+      />
+      <NotesStack.Screen
+        name={"Note"}
+        component={Note}
+        // options={{ headerShown: false }}
+      />
+    </NotesStack.Navigator>
   );
 };
 
-const DeviceNotes = () => {
+const DeviceNotesStack = ({
+  navigation,
+  route,
+}: MaterialTopTabScreenProps<NotesTabsParamList>) => {
+  const hideTabBar = () =>
+    navigation.setOptions({ tabBarStyle: { display: "flex" } });
   return (
-    <View>
-      <Text>Device Notes</Text>
-    </View>
+    <NotesStack.Navigator initialRouteName="AllNotes">
+      <NotesStack.Screen
+        name="AllNotes"
+        component={DeviceNotes}
+        options={{ headerShown: false }}
+      />
+      <NotesStack.Screen
+        name={"Note"}
+        component={Note}
+        // options={{ headerShown: false }}
+      />
+    </NotesStack.Navigator>
   );
 };
