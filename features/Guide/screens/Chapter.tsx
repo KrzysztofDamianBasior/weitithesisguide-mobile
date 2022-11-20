@@ -1,31 +1,51 @@
-import { StyleSheet, Text, ScrollView } from "react-native";
-import React from "react";
+import React, { useContext } from "react";
+import { ScrollView, useWindowDimensions } from "react-native";
+import { useTheme } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { StackScreenProps } from "@react-navigation/stack";
-import { GuideStackParamList } from "../../../shared/navigation/GuideStack";
 import Markdown from "react-native-markdown-display";
 
-import alignResearchInterests from "../data/alignResearchInterests";
+import { StackScreenProps } from "@react-navigation/stack";
+import { GuideStackParamList } from "../../../shared/navigation/GuideStack";
+
+import { fontStyles } from "../../../shared/utils/normalizeFontSize";
+import { ThemeContext } from "../../../shared/context/ThemeContext";
+
 import data from "../data";
 
 const Chapter = ({
   navigation,
   route,
 }: StackScreenProps<GuideStackParamList, "Chapter">) => {
+  const theme = useTheme();
+  const { isThemeDark } = useContext(ThemeContext);
+  const { width, height } = useWindowDimensions();
   const content = data[route.params.chapterNumber];
 
   return (
-    <SafeAreaView style={style.chapterContainer}>
+    <SafeAreaView style={{ padding: 10 }}>
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
-        style={{ height: "100%" }}
+        style={{
+          height: "100%",
+          padding: 5,
+          backgroundColor: isThemeDark
+            ? "rgba(1, 1, 1, 0.4)"
+            : "rgba(255, 255, 255, 0.4)",
+        }}
       >
         {/* 
         // @ts-ignore */}
         <Markdown
           style={{
-            body: { color: "black", fontSize: 20, textAlign: "justify" },
-            heading1: { color: "purple" },
+            body: {
+              color: theme.colors.text,
+              fontSize: fontStyles.small,
+              textAlign: "justify",
+            },
+            heading1: {
+              color: theme.colors.accent,
+              fontSize: fontStyles.large,
+            },
           }}
         >
           {content}
@@ -36,9 +56,3 @@ const Chapter = ({
 };
 
 export default Chapter;
-
-const style = StyleSheet.create({
-  chapterContainer: {
-    padding: 15,
-  },
-});

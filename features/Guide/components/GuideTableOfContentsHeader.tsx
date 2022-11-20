@@ -1,7 +1,6 @@
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-
 import { Appbar, useTheme } from "react-native-paper";
+
 import { StackHeaderProps } from "@react-navigation/stack";
 
 const GuideTableOfContentsHeader = ({
@@ -24,5 +23,3 @@ const GuideTableOfContentsHeader = ({
 };
 
 export default GuideTableOfContentsHeader;
-
-const styles = StyleSheet.create({});

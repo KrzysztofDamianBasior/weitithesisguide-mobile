@@ -16,19 +16,13 @@ export function normalize(size: number) {
 }
 
 export const fontStyles = {
-  mini: {
-    fontSize: normalize(12),
-  },
-  small: {
-    fontSize: normalize(15),
-  },
-  medium: {
-    fontSize: normalize(17),
-  },
-  large: {
-    fontSize: normalize(20),
-  },
-  xlarge: {
-    fontSize: normalize(24),
-  },
+  mini: normalize(12),
+
+  small: normalize(15),
+
+  medium: normalize(17),
+
+  large: normalize(20),
+
+  xlarge: normalize(24),
 };
