@@ -4,10 +4,10 @@
     "slug": "weiti-thesis-guide",
     "version": "0.0.0",
     "orientation": "default",
-    "icon": "./assets/icon.png",
+    "icon": "./shared/assets/icon.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./shared/assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
@@ -20,12 +20,12 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./shared/assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       }
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./shared/assets/favicon.png"
     }
   }
 }

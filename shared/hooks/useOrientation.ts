@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { Dimensions } from "react-native";
 
-const isPortrait = () => {
+const isPortrait = (): boolean => {
   const dim = Dimensions.get("screen");
   return dim.height >= dim.width;
 };

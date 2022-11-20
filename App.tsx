@@ -1,14 +1,17 @@
 import "react-native-gesture-handler";
-import { ImageBackground } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+
 import React from "react";
-import { StatusBar } from "expo-status-bar";
+import { ImageBackground } from "react-native";
+import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
+
 import { Provider as PaperProvider } from "react-native-paper";
 
+import { StatusBar } from "expo-status-bar";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
-import BackgroundDark from "./assets/background-dark.jpg";
-import BackgroundLight from "./assets/background-light.jpg";
+
+import BackgroundDark from "./shared/assets/background-dark.jpg";
+import BackgroundLight from "./shared/assets/background-light.jpg";
 
 import Forum from "./features/Forum";
 import Guide from "./features/Guide";
@@ -72,7 +75,6 @@ export default function App() {
                   component={HomeTabs}
                   options={{
                     headerShown: false,
-                    cardStyle: { backgroundColor: "transparent" },
                   }}
                 />
                 <CoreStack.Screen

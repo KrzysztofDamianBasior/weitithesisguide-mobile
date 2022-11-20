@@ -12,9 +12,9 @@ export default function useAsyncStorage(key: string, initialValue: string) {
       .then(setStoredValue);
   }, [key, initialValue]);
 
-  const setValue = (valueToStore: string) => {
+  const setValue = async (valueToStore: string) => {
     setStoredValue(valueToStore);
-    AsyncStorage.setItem(key, valueToStore);
+    await AsyncStorage.setItem(key, valueToStore);
   };
 
   return [storedValue, setValue];

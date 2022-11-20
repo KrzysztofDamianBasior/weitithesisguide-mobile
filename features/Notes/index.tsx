@@ -17,47 +17,57 @@ import Note from "./screens/Note";
 import DeviceNotes from "./screens/DeviceNotes";
 import CloudNotes from "./screens/CloudNotes";
 
+import { StatusBar } from "expo-status-bar";
+
 const Notes = ({
   route,
   navigation,
 }: MaterialBottomTabScreenProps<BottomTabsParamList, "Notes">) => {
   return (
-    <NotesTab.Navigator initialRouteName="DeviceNotes">
-      <NotesTab.Screen
-        name="DeviceNotes"
-        component={DeviceNotesStack}
-        options={{
-          tabBarAccessibilityLabel: "notes stored in your device",
-          tabBarLabel: "Device Notes",
-          tabBarIcon: ({ focused, color }) => {
-            return focused === true ? (
-              <Ionicons name="hardware-chip" color={color} size={26} />
-            ) : (
-              <Ionicons name="hardware-chip-outline" color={color} size={26} />
-            );
-          },
-        }}
-      />
-      <NotesTab.Screen
-        name="CloudNotes"
-        component={CloudNotesStack}
-        options={{
-          tabBarAccessibilityLabel: "notes stored in a cloud",
-          tabBarLabel: "Cloud Notes",
-          tabBarIcon: ({ focused, color }) => {
-            return focused === true ? (
-              <MaterialCommunityIcons name="cloud" color={color} size={26} />
-            ) : (
-              <MaterialCommunityIcons
-                name="cloud-outline"
-                color={color}
-                size={26}
-              />
-            );
-          },
-        }}
-      />
-    </NotesTab.Navigator>
+    <>
+      <StatusBar hidden={true} />
+
+      <NotesTab.Navigator initialRouteName="DeviceNotes">
+        <NotesTab.Screen
+          name="DeviceNotes"
+          component={DeviceNotesStack}
+          options={{
+            tabBarAccessibilityLabel: "notes stored in your device",
+            tabBarLabel: "Device Notes",
+            tabBarIcon: ({ focused, color }) => {
+              return focused === true ? (
+                <Ionicons name="hardware-chip" color={color} size={26} />
+              ) : (
+                <Ionicons
+                  name="hardware-chip-outline"
+                  color={color}
+                  size={26}
+                />
+              );
+            },
+          }}
+        />
+        <NotesTab.Screen
+          name="CloudNotes"
+          component={CloudNotesStack}
+          options={{
+            tabBarAccessibilityLabel: "notes stored in a cloud",
+            tabBarLabel: "Cloud Notes",
+            tabBarIcon: ({ focused, color }) => {
+              return focused === true ? (
+                <MaterialCommunityIcons name="cloud" color={color} size={26} />
+              ) : (
+                <MaterialCommunityIcons
+                  name="cloud-outline"
+                  color={color}
+                  size={26}
+                />
+              );
+            },
+          }}
+        />
+      </NotesTab.Navigator>
+    </>
   );
 };
 

@@ -1,0 +1,11 @@
+Images by OpenClipart-Vectors from Pixabay  -https://pixabay.com/vectors/boat-cute-minimal-origami-paper-1295836/
+	adaptive-icon.png
+	icon.png
+	logo.png
+	splash.png
+
+Image by Joe from Pixabay  -https://pixabay.com/photos/ocean-milky-way-boat-sailing-3605547/
+	background-dark.jpg
+
+Image by S. Hermann / F. Richter from Pixabay  -https://pixabay.com/photos/paper-boat-sunset-sea-dawn-ship-3361172/ 
+	background-light.jpg  
