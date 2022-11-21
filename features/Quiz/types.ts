@@ -2,7 +2,7 @@ export type QuizContentType = {
   question: string;
   questionId: number;
   answers: { answer: string; nextQuestionId: number | null }[][];
-  selectedAnswer: number | null;
+  selectedAnswer: number[] | null;
 }[];
 
 export type QuizStateType = {

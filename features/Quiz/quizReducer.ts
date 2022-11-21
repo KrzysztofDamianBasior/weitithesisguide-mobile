@@ -1,38 +1,12 @@
 import type { QuizContentType, QuizStateType, QuizActionType } from "./types";
 import { QuizActionKind } from "./types";
+import { quizContent } from "./data/quizContent";
 
 export const quizInitialState: QuizStateType = {
   status: "welcome",
   currentQuestionId: 0,
   selectedAnswers: [],
-  quizContent: [
-    {
-      question: "blaewbla",
-      questionId: 0,
-      answers: [
-        [
-          { answer: "bablaasfbla", nextQuestionId: 1 },
-          { answer: "bablaxvebla", nextQuestionId: 1 },
-        ],
-      ],
-      selectedAnswer: null,
-    },
-    {
-      question: "blablaqw",
-      questionId: 1,
-      answers: [
-        [
-          { answer: "werbablabla", nextQuestionId: null },
-          { answer: "bablasdfwebla", nextQuestionId: null },
-        ],
-        [
-          { answer: "bablterabla", nextQuestionId: null },
-          { answer: "babxcvlabla", nextQuestionId: null },
-        ],
-      ],
-      selectedAnswer: null,
-    },
-  ],
+  quizContent,
 };
 
 export function quizReducer(
@@ -66,6 +40,11 @@ export function quizReducer(
               newState.quizContent[i].answers[action.payload.answerRowId][
                 action.payload.answerColumnId
               ].nextQuestionId;
+
+            newState.quizContent[i].selectedAnswer = [
+              action.payload.answerRowId,
+              action.payload.answerColumnId,
+            ];
 
             const answerId =
               newState.quizContent[i].answers

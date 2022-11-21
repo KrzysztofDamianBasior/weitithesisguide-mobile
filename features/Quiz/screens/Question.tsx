@@ -1,11 +1,21 @@
-import { StyleSheet, View, useWindowDimensions } from "react-native";
 import React, { useState, useContext } from "react";
-import { TouchableOpacity } from "react-native";
-import { Surface, Text } from "react-native-paper";
-import { useTheme } from "react-native-paper";
-import Navigation from "../components/Navigation";
+import {
+  StyleSheet,
+  View,
+  useWindowDimensions,
+  TouchableOpacity,
+} from "react-native";
+import { Text, useTheme } from "react-native-paper";
+
+import Navigation from "../components/QuestionNavigation";
+import Header from "../components/QuestionHeader";
+
 import { QuizContext } from "../quizContext";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { ThemeContext } from "../../../shared/context/ThemeContext";
+
+import { fontStyles } from "../../../shared/utils/normalizeFontSize";
+
+import useOrientation from "../../../shared/hooks/useOrientation";
 
 const Question = ({}) => {
   const [activeQuestion, setActiveQuestion] = useState<{
@@ -16,8 +26,10 @@ const Question = ({}) => {
     activeAnswerColumnId: null,
   });
   const { quiz } = useContext(QuizContext);
+  const { isThemeDark } = useContext(ThemeContext);
   const theme = useTheme();
   const { height, width } = useWindowDimensions();
+  const orientation = useOrientation();
 
   let question = quiz.quizContent.filter(
     (question) => question.questionId === quiz.currentQuestionId
@@ -25,21 +37,38 @@ const Question = ({}) => {
   let answers = question[0].answers;
 
   return (
-    <SafeAreaView style={styles.questionContainer}>
+    <View style={[styles.centerContent, { height: "100%", width: "100%" }]}>
+      <Header />
       <View
         style={[
-          styles.headerContainer,
-          { width: (width * 90) / 100, height: (height * 10) / 100 },
+          styles.contentContainer,
+          orientation === "PORTRAIT"
+            ? {
+                position: "absolute",
+                top: "20%",
+                bottom: "15%",
+                backgroundColor: "red",
+                left: 0,
+                right: 0,
+              }
+            : {
+                position: "absolute",
+                top: "20%",
+                bottom: 0,
+                left: "20%",
+                right: 0,
+                backgroundColor: "red",
+              },
         ]}
       >
-        <Text>{question[0].question}</Text>
-      </View>
-      <View style={styles.contentContainer}>
         {answers.map((answerRow, rowId) => (
           <View
             style={[
               styles.contentRow,
-              { width: (width * 80) / 100, height: (height * 30) / 100 },
+              {
+                width: "100%",
+                height: (height / answers.length) * 0.65,
+              },
             ]}
             key={rowId}
           >
@@ -53,54 +82,61 @@ const Question = ({}) => {
                 }}
                 key={answer.answer}
               >
-                <Surface
+                <View
                   style={[
-                    styles.surface,
-                    { width: (width * 20) / 100, height: (height * 20) / 100 },
-                    {
-                      shadowColor: "#24d3ff",
-                      shadowOffset: {
-                        width: 0,
-                        height: 9,
-                      },
-                      shadowOpacity: 0.5,
-                      shadowRadius: 12.35,
+                    orientation === "PORTRAIT"
+                      ? {
+                          width: (width / answerRow.length) * 0.95,
+                          height: "80%",
+                        }
+                      : {
+                          width: (width / answerRow.length) * 0.7,
+                          height: "80%",
+                        },
 
-                      elevation: 19,
+                    {
+                      margin: 10,
+                      backgroundColor: isThemeDark
+                        ? "rgba(1, 1, 1, 0.4)"
+                        : "rgba(255, 255, 255, 0.4)",
+
+                      alignItems: "center",
+                      justifyContent: "center",
                     },
+                    activeQuestion.activeAnswerColumnId === columnId &&
+                    activeQuestion.activeAnswerRowId === rowId
+                      ? {
+                          shadowColor: "#24d3ff",
+                          shadowOffset: {
+                            width: 1,
+                            height: 1,
+                          },
+                          shadowOpacity: 0.5,
+                          shadowRadius: 12.35,
+                          elevation: 5,
+                        }
+                      : {},
                   ]}
                 >
                   <Text>{answer.answer}</Text>
-                </Surface>
+                </View>
               </TouchableOpacity>
             ))}
           </View>
         ))}
       </View>
-      <View
-        style={[
-          styles.footerContainer,
-          { width: (width * 90) / 100, height: (height * 10) / 100 },
-        ]}
-      >
-        <Navigation
-          activeAnswerRowId={activeQuestion.activeAnswerRowId}
-          activeAnswerColumnId={activeQuestion.activeAnswerColumnId}
-        />
-      </View>
-    </SafeAreaView>
+      <Navigation
+        activeAnswerRowId={activeQuestion.activeAnswerRowId}
+        activeAnswerColumnId={activeQuestion.activeAnswerColumnId}
+      />
+    </View>
   );
 };
 
 export default Question;
 
 const styles = StyleSheet.create({
-  questionContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    flexDirection: "column",
-  },
-  headerContainer: {
+  centerContent: {
     justifyContent: "center",
     alignItems: "center",
   },
@@ -110,14 +146,8 @@ const styles = StyleSheet.create({
     flexDirection: "column",
   },
   contentRow: {
-    justifyContent: "center",
+    justifyContent: "space-around",
     alignItems: "center",
     flexDirection: "row",
-  },
-  footerContainer: { justifyContent: "center", alignItems: "center" },
-  surface: {
-    alignItems: "center",
-    justifyContent: "center",
-    margin: 14,
   },
 });

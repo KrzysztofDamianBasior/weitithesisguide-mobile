@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import React, { useContext } from "react";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 import { FAB, useTheme } from "react-native-paper";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { QuizContext } from "../quizContext";
+import useOrientation from "../../../shared/hooks/useOrientation";
 
 type Props = {
   activeAnswerRowId: number | null;
@@ -10,8 +10,8 @@ type Props = {
 };
 
 const Navigation = ({ activeAnswerColumnId, activeAnswerRowId }: Props) => {
-  const { bottom } = useSafeAreaInsets();
   const { quiz, answerQuestion, goBack } = useContext(QuizContext);
+  const orientation = useOrientation();
   const theme = useTheme();
 
   const firstQuestion = quiz.selectedAnswers.length === 0;
@@ -23,12 +23,19 @@ const Navigation = ({ activeAnswerColumnId, activeAnswerRowId }: Props) => {
       ? false
       : question[0].answers[activeAnswerRowId][activeAnswerColumnId]
           .nextQuestionId === null;
-
   const isAnswerNull =
     activeAnswerRowId !== null && activeAnswerColumnId !== null;
 
   return (
-    <View style={styles.navigationContainer}>
+    <View
+      style={[
+        styles.centerContent,
+        { position: "absolute" },
+        orientation === "PORTRAIT"
+          ? { bottom: 10, width: "100%" }
+          : { left: 0, width: "20%" },
+      ]}
+    >
       <View style={styles.navigationOption}>
         {!firstQuestion && (
           <TouchableOpacity
@@ -40,7 +47,7 @@ const Navigation = ({ activeAnswerColumnId, activeAnswerRowId }: Props) => {
           >
             <FAB
               icon="menu-left"
-              label="previous question"
+              // label="previous question"
               style={styles.fab}
               color={theme.colors.primary}
             />
@@ -61,7 +68,7 @@ const Navigation = ({ activeAnswerColumnId, activeAnswerRowId }: Props) => {
           >
             <FAB
               icon="send-check"
-              label="see results"
+              // label="see results"
               style={styles.fab}
               onPress={() =>
                 answerQuestion({
@@ -85,7 +92,7 @@ const Navigation = ({ activeAnswerColumnId, activeAnswerRowId }: Props) => {
           >
             <FAB
               icon="menu-right"
-              label="next question"
+              // label="next question"
               style={styles.fab}
               color={theme.colors.primary}
             />
@@ -99,6 +106,13 @@ const Navigation = ({ activeAnswerColumnId, activeAnswerRowId }: Props) => {
 export default Navigation;
 
 const styles = StyleSheet.create({
+  centerContent: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "20%",
+  },
+
   navigationContainer: {
     flex: 1,
     flexDirection: "row",
@@ -111,6 +125,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   fab: {
-    margin: 16,
+    margin: 5,
   },
 });

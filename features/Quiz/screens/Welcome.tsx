@@ -1,9 +1,4 @@
-import {
-  StyleSheet,
-  View,
-  useWindowDimensions,
-  TouchableOpacity,
-} from "react-native";
+import { StyleSheet, View, useWindowDimensions } from "react-native";
 import {
   Surface,
   Paragraph,
@@ -16,6 +11,8 @@ import React, { useContext } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import { QuizContext } from "../quizContext";
+
+import { fontStyles } from "../../../shared/utils/normalizeFontSize";
 
 const Welcome = () => {
   const { height, width } = useWindowDimensions();
@@ -30,10 +27,24 @@ const Welcome = () => {
           { width: (width * 80) / 100, height: (height * 50) / 100 },
         ]}
       >
-        <Headline>welcome to our quiz</Headline>
-        <Paragraph>
-          this quiz will help you find a promoter and the topic of your diploma
-          thesis
+        <Headline
+          style={[
+            {
+              padding: 10,
+              fontSize: fontStyles.medium,
+              textAlign: "center",
+              textTransform: "capitalize",
+              color: theme.colors.accent,
+            },
+          ]}
+        >
+          welcome to our quiz
+        </Headline>
+        <Paragraph
+          style={[{ padding: 10, fontSize: fontStyles.small, lineHeight: 30 }]}
+        >
+          This quiz will help you find a thesis supervisor and the topic of your
+          diploma thesis
         </Paragraph>
       </Surface>
       <Button
@@ -52,7 +63,7 @@ const Welcome = () => {
           height: (height * 10) / 100,
         }}
       >
-        quiz
+        Start the quiz
       </Button>
     </SafeAreaView>
   );
@@ -62,14 +73,16 @@ export default Welcome;
 
 const styles = StyleSheet.create({
   welcomeContainer: {
-    flex: 1,
+    width: "100%",
+    height: "100%",
     alignItems: "center",
+    justifyContent: "center",
   },
   button: { justifyContent: "center", alignItems: "center", margin: 10 },
   surface: {
     display: "flex",
     alignItems: "center",
-    justifyContent: "center",
     elevation: 4,
+    padding: 10,
   },
 });

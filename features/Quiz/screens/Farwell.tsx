@@ -7,6 +7,7 @@ import {
   Title,
   useTheme,
   Paragraph,
+  Text,
 } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { QuizContext } from "../quizContext";
@@ -14,6 +15,8 @@ import { findQuizResult } from "../utils/findQuizResult";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { CoreStackParamList } from "../../../shared/navigation/CoreStack";
+import useOrientation from "../../../shared/hooks/useOrientation";
+import { fontStyles } from "../../../shared/utils/normalizeFontSize";
 
 const Farwell = () => {
   const theme = useTheme();
@@ -24,17 +27,20 @@ const Farwell = () => {
   const { height, width } = useWindowDimensions();
   const navigation =
     useNavigation<StackNavigationProp<CoreStackParamList, "Quiz">>();
+  const orientation = useOrientation();
 
   return (
     <SafeAreaView style={styles.farwellContainer}>
       <View style={styles.farwellContent}>
-        <Card>
+        <Card style={styles.card}>
           <Card.Title
             title={title}
             subtitle={subtitle}
             left={() => <Avatar.Icon icon="ship-wheel" />}
           />
-          <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
+          {orientation === "PORTRAIT" && (
+            <Card.Cover source={{ uri: "https://picsum.photos/700" }} />
+          )}
           <Card.Content>
             <Paragraph>{content}</Paragraph>
           </Card.Content>
@@ -48,8 +54,13 @@ const Farwell = () => {
           onPress={() => {
             restart();
           }}
+          style={
+            orientation === "PORTRAIT"
+              ? styles.buttonPortrait
+              : styles.buttonLandscape
+          }
         >
-          repeat the quiz
+          repeat
         </Button>
         <Button
           mode="contained"
@@ -57,8 +68,13 @@ const Farwell = () => {
           onPress={() => {
             navigation.navigate("HomeTabs", { screen: "Home" });
           }}
+          style={
+            orientation === "PORTRAIT"
+              ? styles.buttonPortrait
+              : styles.buttonLandscape
+          }
         >
-          return to homescreen
+          homescreen
         </Button>
       </View>
     </SafeAreaView>
@@ -69,16 +85,38 @@ export default Farwell;
 
 const styles = StyleSheet.create({
   farwellContainer: {
-    // justifyContent: "center",
-    // alignItems: "center",
+    width: "100%",
+    height: "100%",
+    justifyContent: "center",
+    alignItems: "center",
   },
   farwellContent: {
-    // justifyContent: "center",
-    // alignItems: "center",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "90%",
+    height: "70%",
   },
   farwellFooter: {
     flexDirection: "row",
-    // justifyContent: "center",
-    // alignItems: "center",
+    justifyContent: "space-around",
+    alignItems: "center",
+    width: "90%",
+    height: "30%",
+  },
+  card: {
+    width: "90%",
+    height: "100%",
+  },
+  buttonPortrait: {
+    width: "40%",
+    height: "30%",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonLandscape: {
+    width: "40%",
+    height: "80%",
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

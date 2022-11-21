@@ -1,5 +1,5 @@
 import React, { useReducer } from "react";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { View } from "react-native";
 
 import type { CoreStackParamList } from "../../shared/navigation/CoreStack";
 import type { StackScreenProps } from "@react-navigation/stack";
@@ -46,11 +46,11 @@ const Quiz = ({
     <QuizContext.Provider
       value={{ quiz: quizState, goBack, restart, start, answerQuestion }}
     >
-      <SafeAreaView>
+      <View style={{ height: "100%" }}>
         {quizState.status === "welcome" && <Welcome />}
         {quizState.status === "quiz" && <Question />}
         {quizState.status === "farwell" && <Farwell />}
-      </SafeAreaView>
+      </View>
     </QuizContext.Provider>
   );
 };

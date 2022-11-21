@@ -3,7 +3,6 @@ import type { QuizContentType, QuizStateType, QuizActionType } from "./types";
 import { quizInitialState } from "./quizReducer";
 
 export const QuizContext = React.createContext<{
-  // answerQuestion: ({ answerId }: { answerId: number }) => void;
   answerQuestion: ({
     answerRowId,
     answerColumnId,
