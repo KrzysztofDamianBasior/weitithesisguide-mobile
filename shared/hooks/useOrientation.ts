@@ -1,27 +1,15 @@
-import { useEffect, useState } from "react";
-import { Dimensions } from "react-native";
+import react, { useEffect, useState, useRef } from "react";
+import { useWindowDimensions } from "react-native";
 
-const isPortrait = (): boolean => {
-  const dim = Dimensions.get("screen");
-  return dim.height >= dim.width;
-};
-
-// https://stackoverflow.com/questions/47683591/react-native-different-styles-applied-on-orientation-change
 export default function useOrientation(): "PORTRAIT" | "LANDSCAPE" {
+  const { height, width } = useWindowDimensions();
   const [orientation, setOrientation] = useState<"PORTRAIT" | "LANDSCAPE">(
-    isPortrait() ? "PORTRAIT" : "LANDSCAPE"
+    height >= width ? "PORTRAIT" : "LANDSCAPE"
   );
 
   useEffect(() => {
-    const callback = () =>
-      setOrientation(isPortrait() ? "PORTRAIT" : "LANDSCAPE");
-
-    Dimensions.addEventListener("change", callback);
-
-    return () => {
-      Dimensions.removeEventListener("change", callback);
-    };
-  }, []);
+    setOrientation(height >= width ? "PORTRAIT" : "LANDSCAPE");
+  }, [width, height]);
 
   return orientation;
 }
