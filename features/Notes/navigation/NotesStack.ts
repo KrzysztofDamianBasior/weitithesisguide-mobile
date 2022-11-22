@@ -1,9 +1,9 @@
 import { createStackNavigator } from "@react-navigation/stack";
-import type { Note } from "../types";
+import type { NoteType } from "../types";
 
 export type NotesStackParamList = {
   AllNotes: undefined;
-  Note: { note: Note };
+  Note: { note: NoteType };
 };
 
 export const NotesStack = createStackNavigator<NotesStackParamList>();
