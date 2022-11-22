@@ -1,5 +1,11 @@
 import React from "react";
-import { StyleSheet, Text, View, ImageBackground } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+  Dimensions,
+} from "react-native";
 import type { CoreStackParamList } from "../../shared/navigation/CoreStack";
 import type { StackScreenProps } from "@react-navigation/stack";
 
@@ -24,6 +30,8 @@ import { Button } from "react-native-paper";
 import BackgroundDark from "../../assets/background-dark.jpg";
 // import BackgroundLight from "./assets/background-light.jpg";
 
+import * as Animatable from "react-native-animatable";
+
 const Home = ({
   navigation,
   route,
@@ -33,38 +41,50 @@ const Home = ({
 >) => {
   const paperTheme = useTheme();
   return (
-    <View>
-      <Text>home</Text>
-      <Button
-        icon="camera"
-        mode="outlined"
-        onPress={() => navigation.navigate("Forum")}
-        color={paperTheme.colors.text}
-        // type="outlined"
+    <View style={styles.container}>
+      <Animatable.Text
+        style={styles.titleText}
+        animation="fadeInUp"
+        delay={1200}
       >
-        Forum
-      </Button>
-      <Button
-        icon="camera"
-        mode="contained"
-        onPress={() => navigation.navigate("Links")}
+        Weiti Thesis Gudie
+      </Animatable.Text>
+      <View
+        style={{
+          alignSelf: "center",
+        }}
       >
-        links
-      </Button>
-      <Button
-        icon="camera"
-        mode="contained"
-        onPress={() => navigation.navigate("Guide")}
-      >
-        guide
-      </Button>
-      <Button
-        icon="camera"
-        mode="contained"
-        onPress={() => navigation.navigate("Quiz")}
-      >
-        quiz
-      </Button>
+        <Button
+          icon="camera"
+          mode="outlined"
+          onPress={() => navigation.navigate("Forum")}
+          color={paperTheme.colors.text}
+          // type="outlined"
+        >
+          Forum
+        </Button>
+        <Button
+          icon="camera"
+          mode="contained"
+          onPress={() => navigation.navigate("Links")}
+        >
+          links
+        </Button>
+        <Button
+          icon="camera"
+          mode="contained"
+          onPress={() => navigation.navigate("Guide")}
+        >
+          guide
+        </Button>
+        <Button
+          icon="camera"
+          mode="contained"
+          onPress={() => navigation.navigate("Quiz")}
+        >
+          quiz
+        </Button>
+      </View>
     </View>
   );
 };
@@ -73,8 +93,18 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
+    width: "100%",
+    height: "100%",
+    flexDirection: "column",
+  },
+  titleText: {
+    position: "absolute",
+    top: Dimensions.get("screen").height * 0.05,
+    alignSelf: "center",
+    color: "#fff",
+    fontFamily: "SourceSansProBold",
+    fontSize: 60,
   },
 });

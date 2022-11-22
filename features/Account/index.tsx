@@ -1,51 +1,49 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { useContext } from "react";
 import type { BottomTabsParamList } from "../../shared/navigation/BottomTabs";
 import type { MaterialBottomTabScreenProps } from "@react-navigation/material-bottom-tabs";
+import { AccountStack } from "./navigation";
+import { AuthContext } from "../../shared/context/AuthContext";
 
-import { Button } from "react-native-paper";
-
-type Props = {};
+import Login from "./screens/Login";
+import Register from "./screens/Register";
+import Profile from "./screens/Profile";
 
 const Account = ({
   route,
   navigation,
 }: MaterialBottomTabScreenProps<BottomTabsParamList, "Account">) => {
+  const { authState } = useContext(AuthContext);
+
   return (
-    <View style={{ backgroundColor: "transparent", flex: 1 }}>
-      <Text>profile</Text>
-      <Button
-        icon="camera"
-        mode="contained"
-        onPress={() => navigation.navigate("Home")}
-      >
-        home
-      </Button>
-      <Button
-        icon="camera"
-        mode="contained"
-        onPress={() => navigation.navigate("Notes")}
-      >
-        notes
-      </Button>
-      <Button
-        icon="camera"
-        mode="contained"
-        onPress={() => navigation.navigate("Settings")}
-      >
-        settings
-      </Button>
-    </View>
+    <AccountStack.Navigator
+      screenOptions={{
+        cardStyle: { backgroundColor: "transparent" },
+      }}
+    >
+      {authState.userToken == null ? (
+        <>
+          <AccountStack.Screen
+            name="SignIn"
+            component={Login}
+            options={{ headerShown: false }}
+          />
+          <AccountStack.Screen
+            name="Register"
+            component={Register}
+            options={{ headerShown: false }}
+          />
+        </>
+      ) : (
+        <>
+          <AccountStack.Screen
+            name="Profile"
+            component={Profile}
+            options={{ headerShown: false }}
+          />
+        </>
+      )}
+    </AccountStack.Navigator>
   );
 };
 
 export default Account;
-
-const styles = StyleSheet.create({});
-
-// SignInScreen
-// SplashScreen
-
-// state.userToken == null => ( show signin screen )
-// state.loading == true => ( show splash screen)
-// else => show profile screen
