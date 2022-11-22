@@ -47,7 +47,6 @@ const Question = ({}) => {
                 position: "absolute",
                 top: "20%",
                 bottom: "15%",
-                backgroundColor: "red",
                 left: 0,
                 right: 0,
               }
@@ -57,7 +56,6 @@ const Question = ({}) => {
                 bottom: 0,
                 left: "20%",
                 right: 0,
-                backgroundColor: "red",
               },
         ]}
       >
