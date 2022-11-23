@@ -27,11 +27,7 @@ const Account = ({
             component={Login}
             options={{ headerShown: false }}
           />
-          <AccountStack.Screen
-            name="Register"
-            component={Register}
-            options={{ headerShown: false }}
-          />
+          <AccountStack.Screen name="Register" component={Register} />
         </>
       ) : (
         <>

@@ -6,16 +6,40 @@ import {
   TextInput,
   TouchableOpacity,
   TouchableWithoutFeedback,
+  Dimensions,
   Keyboard,
 } from "react-native";
 import { List } from "react-native-paper";
 
-export default function Login() {
+import { StackScreenProps } from "@react-navigation/stack";
+import { AccountStackParamList } from "../navigation";
+
+import * as Animatable from "react-native-animatable";
+const Login = ({
+  route,
+  navigation,
+}: StackScreenProps<AccountStackParamList, "SignIn">) => {
   return (
     <View style={{ width: "100%", height: "100%" }}>
+      <Animatable.View
+        animation="slideInDown"
+        direction="alternate"
+        easing="ease-out"
+        iterationCount="infinite"
+        style={styles.bigCircle}
+        duration={8000}
+      ></Animatable.View>
+      <Animatable.View
+        animation="slideInUp"
+        direction="alternate"
+        easing="ease-out"
+        iterationCount="infinite"
+        style={styles.smallCircle}
+        duration={3500}
+      ></Animatable.View>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
-        <View style={styles.bottomView}>
-          <Text style={styles.loginText}>Login</Text>
+        <View style={styles.bottomForm}>
+          <Text style={styles.title}>Login</Text>
           <View style={styles.inputView}>
             <List.Icon
               style={styles.inputIcon}
@@ -47,19 +71,46 @@ export default function Login() {
           </TouchableOpacity>
           <Text style={styles.registerText}>
             Don't have an account?
-            <Text style={styles.registerLink}>{" Register"}</Text>
+            <Text
+              style={styles.registerLink}
+              onPress={() => navigation.navigate("Register")}
+            >
+              {" Register"}
+            </Text>
           </Text>
         </View>
       </TouchableWithoutFeedback>
     </View>
   );
-}
+};
+
+export default Login;
 
 const styles = StyleSheet.create({
+  bigCircle: {
+    width: Dimensions.get("window").height * 0.7,
+    height: Dimensions.get("window").height * 0.7,
+    backgroundColor: "#164c5a",
+    opacity: 0.3,
+    borderRadius: 1000,
+    position: "absolute",
+    right: Dimensions.get("window").width * 0.5,
+    top: Dimensions.get("window").height * 0.2,
+  },
+  smallCircle: {
+    width: Dimensions.get("window").height * 0.5,
+    height: Dimensions.get("window").height * 0.5,
+    backgroundColor: "#0d192e",
+    borderRadius: 1000,
+    position: "absolute",
+    top: Dimensions.get("window").width * -0.2,
+    right: Dimensions.get("window").width * -0.4,
+    opacity: 0.5,
+  },
   container: {
     flex: 1,
   },
-  bottomView: {
+  bottomForm: {
     backgroundColor: "#fff",
     position: "absolute",
     bottom: 0,
@@ -70,7 +121,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     paddingHorizontal: 20,
   },
-  loginText: {
+  title: {
     fontSize: 24,
     marginTop: 12,
     marginBottom: 4,
@@ -90,7 +141,6 @@ const styles = StyleSheet.create({
   input: {
     height: 40,
     flex: 1,
-    fontFamily: "SourceSansProRegular",
     fontSize: 16,
     color: "#000000",
   },
@@ -109,7 +159,6 @@ const styles = StyleSheet.create({
   registerText: {
     alignSelf: "center",
     marginTop: 12,
-    fontFamily: "SourceSansProRegular",
     fontSize: 16,
   },
   forgetPasswordText: {

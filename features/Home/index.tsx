@@ -104,7 +104,6 @@ const styles = StyleSheet.create({
     top: Dimensions.get("screen").height * 0.05,
     alignSelf: "center",
     color: "#fff",
-    fontFamily: "SourceSansProBold",
     fontSize: 60,
   },
 });
