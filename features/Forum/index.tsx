@@ -1,49 +1,25 @@
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { StyleSheet } from "react-native";
 import type { CoreStackParamList } from "../../shared/navigation/CoreStack";
 import type { StackScreenProps } from "@react-navigation/stack";
-import { Button } from "react-native-paper";
-type Props = {};
+import { ForumStack } from "./navigation";
+import Post from "./screens/Post";
+import PostsList from "./screens/PostsList";
 
 const Forum = ({
   navigation,
   route,
 }: StackScreenProps<CoreStackParamList, "Forum">) => {
   return (
-    <View>
-      <Text>Forum</Text>
-      <Button
-        icon="camera"
-        mode="contained"
-        onPress={() => navigation.navigate("HomeTabs", { screen: "Home" })}
-      >
-        Home
-      </Button>
-      <Button
-        icon="camera"
-        mode="contained"
-        onPress={() => navigation.navigate("Links")}
-      >
-        links
-      </Button>
-      <Button
-        icon="camera"
-        mode="contained"
-        onPress={() => navigation.navigate("Guide")}
-      >
-        guide
-      </Button>
-      <Button
-        icon="camera"
-        mode="contained"
-        onPress={() => navigation.navigate("Quiz")}
-      >
-        quiz
-      </Button>
-    </View>
+    <ForumStack.Navigator
+      screenOptions={{
+        cardStyle: { backgroundColor: "transparent" },
+      }}
+    >
+      <ForumStack.Screen name="PostsList" component={PostsList} />
+      <ForumStack.Screen name="Post" component={Post} />
+    </ForumStack.Navigator>
   );
 };
 
 export default Forum;
-
-const styles = StyleSheet.create({});

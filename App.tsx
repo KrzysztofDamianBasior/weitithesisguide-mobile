@@ -155,7 +155,11 @@ export default function App() {
                     component={Guide}
                     options={{ headerShown: false }}
                   />
-                  <CoreStack.Screen name="Forum" component={Forum} />
+                  <CoreStack.Screen
+                    name="Forum"
+                    component={Forum}
+                    options={{ headerShown: false }}
+                  />
                   <CoreStack.Screen name="Links" component={Links} />
                 </CoreStack.Navigator>
               </NavigationContainer>
