@@ -68,10 +68,18 @@ export default function App() {
 
       // This will switch to the App screen or Auth screen and this loading
       // screen will be unmounted and thrown away.
-      authDispatch({
-        type: AuthActionKind.RESTORE_TOKEN,
-        payload: { token: userToken },
-      });
+      if (userToken) {
+        authDispatch({
+          type: AuthActionKind.SIGN_IN,
+          payload: {
+            user: {
+              name: "Nelly Samuels",
+              email: "NellySamuels@gmail.com",
+              token: "12345",
+            },
+          },
+        });
+      }
     };
 
     bootstrapAsync();
@@ -85,7 +93,13 @@ export default function App() {
 
     authDispatch({
       type: AuthActionKind.SIGN_IN,
-      payload: { token: "dummy-auth-token" },
+      payload: {
+        user: {
+          name: "Nelly Samuels",
+          email: "NellySamuels@gmail.com",
+          token: "12345",
+        },
+      },
     });
   };
 
@@ -99,7 +113,13 @@ export default function App() {
 
     authDispatch({
       type: AuthActionKind.SIGN_IN,
-      payload: { token: "dummy-auth-token" },
+      payload: {
+        user: {
+          name: "Nelly Samuels",
+          email: "NellySamuels@gmail.com",
+          token: "12345",
+        },
+      },
     });
   };
 

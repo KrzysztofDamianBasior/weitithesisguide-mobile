@@ -20,15 +20,14 @@ const Account = ({
         cardStyle: { backgroundColor: "transparent" },
       }}
     >
-      {authState.userToken == null ? (
+      {authState.user.token === null ? (
         <>
           <AccountStack.Screen
             name="SignIn"
             component={Login}
             options={{ headerShown: false }}
           />
-          {/* <AccountStack.Screen name="Register" component={Register} /> */}
-          <AccountStack.Screen name="Register" component={Profile} />
+          <AccountStack.Screen name="Register" component={Register} />
         </>
       ) : (
         <>

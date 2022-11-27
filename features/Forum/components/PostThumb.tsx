@@ -53,6 +53,7 @@ const PostThumb = ({
       >
         {tags.map((tag) => (
           <Text
+            key={tag}
             style={{
               marginTop: 5,
               marginBottom: 5,

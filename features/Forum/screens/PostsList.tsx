@@ -14,7 +14,7 @@ import PostThumb from "../components/PostThumb";
 
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
-const AllPosts = ({
+const PostsList = ({
   route,
   navigation,
 }: StackScreenProps<ForumStackParamList, "PostsList">) => {
@@ -50,20 +50,6 @@ const AllPosts = ({
       tags: ["1", "2", "3", "4", "5"],
     },
   ]);
-
-  navigation.setOptions({
-    title: "Forum",
-    headerTitleStyle: { fontSize: 18 },
-    headerStyle: { backgroundColor: "#483c03" },
-    headerRight: () => (
-      <TouchableOpacity style={{ marginHorizontal: 20 }}>
-        <List.Icon
-          icon="frequently-asked-questions"
-          style={{ width: 24, height: 24 }}
-        />
-      </TouchableOpacity>
-    ),
-  });
 
   return (
     <>
@@ -118,7 +104,7 @@ const AllPosts = ({
       <ScrollView>
         {allPosts.map((post) => (
           <TouchableOpacity
-            onPress={() => navigation.navigate("Post")}
+            onPress={() => navigation.navigate("Post", { postThumbData: post })}
             key={post.title}
           >
             <PostThumb {...post} />
@@ -129,4 +115,4 @@ const AllPosts = ({
   );
 };
 
-export default AllPosts;
+export default PostsList;
