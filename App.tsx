@@ -7,7 +7,6 @@ import { SafeAreaProvider, SafeAreaView } from "react-native-safe-area-context";
 import { Provider as PaperProvider } from "react-native-paper";
 
 import { StatusBar } from "expo-status-bar";
-import * as SecureStore from "expo-secure-store";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
@@ -36,92 +35,15 @@ import {
   ThemeContext,
 } from "./shared/context/ThemeContext";
 
-import {
-  AuthActionKind,
-  AuthContext,
-  authInitialState,
-  authReducer,
-} from "./shared/context/AuthContext";
+import { AuthContext } from "./shared/context/AuthContext";
+import useAuth from "./shared/hooks/useAuth";
 
 export default function App() {
   // const [loaded] = useFonts({});
   // if (!loaded || !BackgroundDark || !BackgroundLight) {return splash}
 
   const [isThemeDark, setIsThemeDark] = React.useState<boolean>(true);
-  const [authState, authDispatch] = React.useReducer(
-    authReducer,
-    authInitialState
-  );
-
-  React.useEffect(() => {
-    // Fetch the token from storage then navigate to our appropriate place
-    const bootstrapAsync = async () => {
-      let userToken: string | null = null;
-
-      try {
-        userToken = await SecureStore.getItemAsync("userToken");
-      } catch (e) {
-        // Restoring token failed
-      }
-
-      // After restoring token, we may need to validate it in production apps
-
-      // This will switch to the App screen or Auth screen and this loading
-      // screen will be unmounted and thrown away.
-      if (userToken) {
-        authDispatch({
-          type: AuthActionKind.SIGN_IN,
-          payload: {
-            user: {
-              name: "Nelly Samuels",
-              email: "NellySamuels@gmail.com",
-              token: "12345",
-            },
-          },
-        });
-      }
-    };
-
-    bootstrapAsync();
-  }, []);
-
-  const signIn = async (data: string) => {
-    // In a production app, we need to send some data (usually username, password) to server and get a token
-    // We will also need to handle errors if sign in failed
-    // After getting token, we need to persist the token using `SecureStore`
-    // In the example, we'll use a dummy token
-
-    authDispatch({
-      type: AuthActionKind.SIGN_IN,
-      payload: {
-        user: {
-          name: "Nelly Samuels",
-          email: "NellySamuels@gmail.com",
-          token: "12345",
-        },
-      },
-    });
-  };
-
-  const signOut = () => authDispatch({ type: AuthActionKind.SIGN_OUT });
-
-  const signUp = async (data: string) => {
-    // In a production app, we need to send user data to server and get a token
-    // We will also need to handle errors if sign up failed
-    // After getting token, we need to persist the token using `SecureStore`
-    // In the example, we'll use a dummy token
-
-    authDispatch({
-      type: AuthActionKind.SIGN_IN,
-      payload: {
-        user: {
-          name: "Nelly Samuels",
-          email: "NellySamuels@gmail.com",
-          token: "12345",
-        },
-      },
-    });
-  };
+  const { authDispatch, authState, signIn, signOut, signUp } = useAuth();
 
   const toggleTheme = React.useCallback(() => {
     return setIsThemeDark(!isThemeDark);

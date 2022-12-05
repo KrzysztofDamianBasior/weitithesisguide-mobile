@@ -1,16 +1,18 @@
 import React from "react";
 
+export type UserDataType = {
+  token: string | null;
+  name: string | null;
+  email: string | null;
+};
+
 export type AuthStateType = {
   status: "signIn" | "signOut" | "loading";
-  user: {
-    token: string | null;
-    name: string | null;
-    email: string | null;
-  };
+  user: UserDataType;
 };
 
 export const authInitialState: AuthStateType = {
-  status: "signOut",
+  status: "loading",
   user: {
     token: null,
     name: null,
@@ -19,20 +21,24 @@ export const authInitialState: AuthStateType = {
 };
 
 export enum AuthActionKind {
-  BEFORE_SIGN_IN = "before-sign-in",
+  LOADING = "loading",
   SIGN_IN = "sign-in",
   SIGN_OUT = "sign-out",
 }
 
-export type AuthActionType = {
-  type: AuthActionKind;
-  payload?: {
-    user?: {
-      token: string | null;
-      name: string | null;
-      email: string | null;
-    };
-  };
+export type AuthActionType = LoadingAction | SignInAction | SignOutAction;
+
+export type LoadingAction = {
+  type: AuthActionKind.LOADING;
+};
+
+export type SignInAction = {
+  type: AuthActionKind.SIGN_IN;
+  payload: UserDataType;
+};
+
+export type SignOutAction = {
+  type: AuthActionKind.SIGN_OUT;
 };
 
 export const authReducer = (
@@ -42,14 +48,12 @@ export const authReducer = (
   let newState: AuthStateType = JSON.parse(JSON.stringify(state));
 
   switch (action.type) {
-    case AuthActionKind.BEFORE_SIGN_IN:
+    case AuthActionKind.LOADING:
       newState.status = "loading";
       return { ...newState };
 
     case AuthActionKind.SIGN_IN:
-      if (action.payload?.user) {
-        newState.user = action.payload.user;
-      }
+      newState.user = action.payload;
       newState.status = "signIn";
       return { ...newState };
 
@@ -64,14 +68,16 @@ export const authReducer = (
   }
 };
 
-export const AuthContext = React.createContext<{
-  signIn: (data: string) => void;
-  signUp: (data: string) => void;
+export type AuthContextType = {
+  signIn: (userData: UserDataType) => void;
+  signUp: (userData: UserDataType) => void;
   signOut: () => void;
   authState: AuthStateType;
-}>({
-  signIn: (data: string) => {},
-  signUp: (data: string) => {},
+};
+
+export const AuthContext = React.createContext<AuthContextType>({
+  signIn: (userData: UserDataType) => {},
+  signUp: (userData: UserDataType) => {},
   signOut: () => {},
   authState: authInitialState,
 });
