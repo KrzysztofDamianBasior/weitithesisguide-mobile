@@ -9,3 +9,15 @@ Image by Joe from Pixabay  -https://pixabay.com/photos/ocean-milky-way-boat-sail
 
 Image by S. Hermann / F. Richter from Pixabay  -https://pixabay.com/photos/paper-boat-sunset-sea-dawn-ship-3361172/ 
 	background-light.jpg  
+
+Image by Chen from Pixabay -https://pixabay.com/illustrations/question-mark-green-background-5949781/
+	quiz.jpg 
+
+Image by Cloé Gérard from Pixabay -https://pixabay.com/photos/pendulum-map-navigation-compass-1934311/
+	guide.jpg
+
+Image by Gerd Altmann from Pixabay -https://pixabay.com/photos/businessman-tablet-steering-city-3213659/
+	links.jpg
+
+Image by 정훈 김 from Pixabay -https://pixabay.com/photos/event-venue-auditorium-meeting-1597531/
+	forum.jpg

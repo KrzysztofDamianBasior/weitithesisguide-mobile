@@ -5,32 +5,25 @@ import {
   View,
   ImageBackground,
   Dimensions,
+  useWindowDimensions,
+  StatusBar,
+  TouchableOpacity,
 } from "react-native";
 import type { CoreStackParamList } from "../../shared/navigation/CoreStack";
 import type { StackScreenProps } from "@react-navigation/stack";
 
 import type { CompositeScreenProps } from "@react-navigation/native";
-import type { CompositeNavigationProp } from "@react-navigation/native";
 
 import type { BottomTabsParamList } from "../../shared/navigation/BottomTabs";
 import type { MaterialBottomTabScreenProps } from "@react-navigation/material-bottom-tabs";
 
-import {
-  useTheme,
-  Avatar,
-  Title,
-  Caption,
-  Paragraph,
-  Drawer,
-  TouchableRipple,
-  Switch,
-} from "react-native-paper";
-import { Button } from "react-native-paper";
-
-import BackgroundDark from "../../assets/background-dark.jpg";
-// import BackgroundLight from "./assets/background-light.jpg";
-
+import { useTheme } from "react-native-paper";
 import * as Animatable from "react-native-animatable";
+
+import BackgroundLink from "../../shared/assets/links.jpg";
+import BackgroundForum from "../../shared/assets/forum.jpg";
+import BackgroundGuide from "../../shared/assets/guide.jpg";
+import BackgroundQuiz from "../../shared/assets/quiz.jpg";
 
 const Home = ({
   navigation,
@@ -40,50 +33,161 @@ const Home = ({
   StackScreenProps<CoreStackParamList>
 >) => {
   const paperTheme = useTheme();
+  const { width, height } = useWindowDimensions();
+
   return (
     <View style={styles.container}>
-      <Animatable.Text
-        style={styles.titleText}
-        animation="fadeInUp"
-        delay={1200}
-      >
-        Weiti Thesis Gudie
-      </Animatable.Text>
+      <StatusBar hidden={false} barStyle="light-content" />
+      <Animatable.View
+        animation="slideInDown"
+        direction="alternate"
+        easing="ease-out"
+        iterationCount="infinite"
+        style={styles.bigCircle}
+        duration={8000}
+      ></Animatable.View>
+      <Animatable.View
+        animation="slideInUp"
+        direction="alternate"
+        easing="ease-out"
+        iterationCount="infinite"
+        style={styles.smallCircle}
+        duration={3500}
+      ></Animatable.View>
       <View
         style={{
-          alignSelf: "center",
+          flex: 1,
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        <Button
-          icon="camera"
-          mode="outlined"
-          onPress={() => navigation.navigate("Forum")}
-          color={paperTheme.colors.text}
-          // type="outlined"
+        <Animatable.Text
+          style={styles.titleText}
+          animation="fadeInUp"
+          delay={1200}
         >
-          Forum
-        </Button>
-        <Button
-          icon="camera"
-          mode="contained"
-          onPress={() => navigation.navigate("Links")}
+          Weiti Thesis Guide
+        </Animatable.Text>
+      </View>
+      <View
+        style={{
+          flex: 4,
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
         >
-          links
-        </Button>
-        <Button
-          icon="camera"
-          mode="contained"
-          onPress={() => navigation.navigate("Guide")}
+          <TouchableOpacity onPress={() => navigation.navigate("Forum")}>
+            <View style={{ width: 150, height: 150, margin: 10 }}>
+              <ImageBackground
+                source={BackgroundForum}
+                resizeMode="cover"
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    color: paperTheme.colors.text,
+                    fontSize: 25,
+                    alignSelf: "center",
+                  }}
+                >
+                  Forum
+                </Text>
+              </ImageBackground>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => navigation.navigate("Links")}>
+            <View
+              style={{
+                width: 150,
+                height: 150,
+                margin: 10,
+              }}
+            >
+              <ImageBackground
+                source={BackgroundLink}
+                resizeMode="cover"
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    color: paperTheme.colors.text,
+                    fontSize: 25,
+                    alignSelf: "center",
+                  }}
+                >
+                  Links
+                </Text>
+              </ImageBackground>
+            </View>
+          </TouchableOpacity>
+        </View>
+        <View
+          style={{
+            flexDirection: "row",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
         >
-          guide
-        </Button>
-        <Button
-          icon="camera"
-          mode="contained"
-          onPress={() => navigation.navigate("Quiz")}
-        >
-          quiz
-        </Button>
+          <TouchableOpacity onPress={() => navigation.navigate("Guide")}>
+            <View style={{ width: 150, height: 150, margin: 10 }}>
+              <ImageBackground
+                source={BackgroundGuide}
+                resizeMode="cover"
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    color: paperTheme.colors.text,
+                    fontSize: 25,
+                    alignSelf: "center",
+                  }}
+                >
+                  Guide
+                </Text>
+              </ImageBackground>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity onPress={() => navigation.navigate("Quiz")}>
+            <View style={{ width: 150, height: 150, margin: 10 }}>
+              <ImageBackground
+                source={BackgroundQuiz}
+                resizeMode="cover"
+                style={{
+                  flex: 1,
+                  justifyContent: "center",
+                }}
+              >
+                <Text
+                  style={{
+                    color: paperTheme.colors.text,
+                    fontSize: 25,
+                    alignSelf: "center",
+                  }}
+                >
+                  Quiz
+                </Text>
+              </ImageBackground>
+            </View>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
@@ -91,19 +195,33 @@ const Home = ({
 export default Home;
 
 const styles = StyleSheet.create({
+  bigCircle: {
+    width: Dimensions.get("window").height * 0.7,
+    height: Dimensions.get("window").height * 0.7,
+    backgroundColor: "#164c5a",
+    opacity: 0.3,
+    borderRadius: 1000,
+    position: "absolute",
+    right: Dimensions.get("window").width * 0.5,
+    top: Dimensions.get("window").height * 0.2,
+  },
+  smallCircle: {
+    width: Dimensions.get("window").height * 0.5,
+    height: Dimensions.get("window").height * 0.5,
+    backgroundColor: "#0d192e",
+    borderRadius: 1000,
+    position: "absolute",
+    top: Dimensions.get("window").width * -0.2,
+    right: Dimensions.get("window").width * -0.4,
+    opacity: 0.5,
+  },
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
-    width: "100%",
-    height: "100%",
-    flexDirection: "column",
   },
   titleText: {
-    position: "absolute",
-    top: Dimensions.get("screen").height * 0.05,
     alignSelf: "center",
     color: "#fff",
-    fontSize: 60,
+    fontSize: 40,
+    marginTop: 60,
   },
 });
