@@ -12,6 +12,32 @@ import Farwell from "./screens/Farwell";
 import Question from "./screens/Question";
 import Welcome from "./screens/Welcome";
 
+// jeśli są dwie to wyświetl je
+
+// [] []
+
+// jeśli są trzy to wyświetl je
+
+// []
+// []
+// []
+
+// jeśli są cztery to wyświetl je
+
+// [] []
+// [] []
+
+// jeśli jest 5 to wyświetl je
+
+// [] [] []
+// [] []
+
+// jeśli jest 6 to wyświetl je
+
+// [] []
+// [] []
+// [] []
+
 const Quiz = ({
   navigation,
   route,

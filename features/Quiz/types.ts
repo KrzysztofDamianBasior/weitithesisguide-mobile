@@ -19,10 +19,28 @@ export enum QuizActionKind {
   GO_BACK = "go-back",
 }
 
-export type QuizActionType = {
-  type: QuizActionKind;
-  payload?: {
-    answerRowId?: number;
-    answerColumnId?: number;
+export type QuizOperationType =
+  | StartAction
+  | RestartAction
+  | SelectAnswerAction
+  | GoBackAction;
+
+export type StartAction = {
+  type: QuizActionKind.START;
+};
+
+export type RestartAction = {
+  type: QuizActionKind.RESTART;
+};
+
+export type SelectAnswerAction = {
+  type: QuizActionKind.SELECT_ANSWER;
+  payload: {
+    answerRowId: number;
+    answerColumnId: number;
   };
+};
+
+export type GoBackAction = {
+  type: QuizActionKind.GO_BACK;
 };

@@ -6,7 +6,7 @@ const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("window");
 const scale = SCREEN_WIDTH / 320;
 
 // https://stackoverflow.com/questions/33628677/react-native-responsive-font-size
-export function normalize(size: number) {
+export function normalize(size: number, scale: number) {
   const newSize = size * scale;
   if (Platform.OS === "ios") {
     return Math.round(PixelRatio.roundToNearestPixel(newSize));
@@ -16,13 +16,13 @@ export function normalize(size: number) {
 }
 
 export const fontStyles = {
-  mini: normalize(12),
+  mini: normalize(12, scale),
 
-  small: normalize(15),
+  small: normalize(15, scale),
 
-  medium: normalize(17),
+  medium: normalize(17, scale),
 
-  large: normalize(20),
+  large: normalize(20, scale),
 
-  xlarge: normalize(24),
+  xlarge: normalize(24, scale),
 };

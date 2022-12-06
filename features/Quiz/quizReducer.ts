@@ -1,4 +1,4 @@
-import type { QuizContentType, QuizStateType, QuizActionType } from "./types";
+import type { QuizStateType, QuizOperationType } from "./types";
 import { QuizActionKind } from "./types";
 import { quizContent } from "./data/quizContent";
 
@@ -11,7 +11,7 @@ export const quizInitialState: QuizStateType = {
 
 export function quizReducer(
   state: QuizStateType,
-  action: QuizActionType
+  action: QuizOperationType
 ): QuizStateType {
   let newState: QuizStateType = JSON.parse(JSON.stringify(state));
 
@@ -32,40 +32,36 @@ export function quizReducer(
     case QuizActionKind.SELECT_ANSWER:
       for (let i = 0; i < newState.quizContent.length; i++) {
         if (newState.quizContent[i].questionId === newState.currentQuestionId) {
-          if (
-            typeof action.payload?.answerRowId === "number" &&
-            typeof action.payload?.answerColumnId === "number"
-          ) {
-            const nextQuestionId =
-              newState.quizContent[i].answers[action.payload.answerRowId][
-                action.payload.answerColumnId
-              ].nextQuestionId;
+          const nextQuestionId =
+            newState.quizContent[i].answers[action.payload.answerRowId][
+              action.payload.answerColumnId
+            ].nextQuestionId;
 
-            newState.quizContent[i].selectedAnswer = [
-              action.payload.answerRowId,
-              action.payload.answerColumnId,
-            ];
+          newState.quizContent[i].selectedAnswer = [
+            action.payload.answerRowId,
+            action.payload.answerColumnId,
+          ];
 
-            const answerId =
-              newState.quizContent[i].answers
-                .slice(0, action.payload.answerRowId)
-                .reduce(
-                  (previousValue, currentValue) =>
-                    previousValue + currentValue.length,
-                  0
-                ) + action.payload.answerColumnId;
+          const answerId =
+            newState.quizContent[i].answers
+              .slice(0, action.payload.answerRowId)
+              .reduce(
+                (previousValue, currentValue) =>
+                  previousValue + currentValue.length,
+                0
+              ) + action.payload.answerColumnId;
 
-            newState.selectedAnswers.push({
-              answerId: answerId,
-              questionId: newState.currentQuestionId,
-            });
+          newState.selectedAnswers.push({
+            answerId: answerId,
+            questionId: newState.currentQuestionId,
+          });
 
-            if (nextQuestionId !== null) {
-              newState.currentQuestionId = nextQuestionId;
-            } else {
-              newState.status = "farwell";
-            }
+          if (nextQuestionId !== null) {
+            newState.currentQuestionId = nextQuestionId;
+          } else {
+            newState.status = "farwell";
           }
+
           break;
         }
       }

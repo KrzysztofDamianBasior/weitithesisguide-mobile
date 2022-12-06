@@ -1,5 +1,5 @@
 import React from "react";
-import type { QuizContentType, QuizStateType, QuizActionType } from "./types";
+import type { QuizStateType } from "./types";
 import { quizInitialState } from "./quizReducer";
 
 export const QuizContext = React.createContext<{
