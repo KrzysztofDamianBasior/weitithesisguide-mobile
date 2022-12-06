@@ -21,7 +21,7 @@ import Links from "./features/Links";
 import Notes from "./features/Notes";
 import Account from "./features/Account";
 import Settings from "./features/Settings";
-import QuizHeader from "./features/Quiz/components/QuizHeader";
+import QuizHeader from "./features/Quiz/components/Header";
 
 import { NavigationContainer } from "@react-navigation/native";
 import type { StackScreenProps } from "@react-navigation/stack";

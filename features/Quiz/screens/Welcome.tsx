@@ -1,4 +1,4 @@
-import { StyleSheet, View, useWindowDimensions } from "react-native";
+import { StyleSheet, useWindowDimensions } from "react-native";
 import {
   Surface,
   Paragraph,
@@ -24,27 +24,31 @@ const Welcome = () => {
       <Surface
         style={[
           styles.surface,
-          { width: (width * 80) / 100, height: (height * 50) / 100 },
+          // { width: (width * 80) / 100, height: (height * 50) / 100 },
         ]}
       >
         <Headline
           style={[
             {
               padding: 10,
-              fontSize: fontStyles.medium,
+              fontSize: fontStyles.large,
               textAlign: "center",
               textTransform: "capitalize",
+              margin: 50,
               color: theme.colors.accent,
             },
           ]}
         >
-          welcome to our quiz
+          Eiti Thesis Quiz
         </Headline>
-        <Paragraph
-          style={[{ padding: 10, fontSize: fontStyles.small, lineHeight: 30 }]}
-        >
-          This quiz will help you find a thesis supervisor and the topic of your
+        <Paragraph style={[{ padding: 5, fontSize: fontStyles.small }]}>
+          The quiz will help you find a thesis supervisor and the topic of your
           diploma thesis
+        </Paragraph>
+
+        <Paragraph style={[{ padding: 5, fontSize: fontStyles.small }]}>
+          Find out which institute suits you best and in what thesis topic you
+          will find fulfillment
         </Paragraph>
       </Surface>
       <Button
@@ -83,6 +87,8 @@ const styles = StyleSheet.create({
     display: "flex",
     alignItems: "center",
     elevation: 4,
-    padding: 10,
+    width: "80%",
+    paddingHorizontal: 10,
+    paddingVertical: 20,
   },
 });

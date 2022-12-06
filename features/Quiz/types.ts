@@ -44,3 +44,5 @@ export type SelectAnswerAction = {
 export type GoBackAction = {
   type: QuizActionKind.GO_BACK;
 };
+
+export type QuizResultsTableType = { questionId: number; answerId: number }[][];

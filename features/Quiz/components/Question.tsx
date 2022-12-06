@@ -48,6 +48,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     top: 5,
     width: "90%",
-    height: "12%",
+    height: "18%",
   },
 });

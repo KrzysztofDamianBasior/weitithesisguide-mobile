@@ -1,12 +1,12 @@
-export const quizContent = [
+import type { QuizContentType } from "../types";
+
+export const quizContent: QuizContentType = [
   {
     question: "blaewbla",
     questionId: 0,
     answers: [
-      [
-        { answer: "bablaasfbla", nextQuestionId: 1 },
-        { answer: "bablaxvebla", nextQuestionId: 1 },
-      ],
+      [{ answer: "bablaasfbla", nextQuestionId: 1 }],
+      [{ answer: "bablaxvebla", nextQuestionId: 1 }],
     ],
     selectedAnswer: null,
   },

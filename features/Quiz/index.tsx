@@ -9,34 +9,8 @@ import { quizReducer, quizInitialState } from "./quizReducer";
 import { QuizActionKind } from "./types";
 
 import Farwell from "./screens/Farwell";
-import Question from "./screens/Question";
+import Form from "./screens/Form";
 import Welcome from "./screens/Welcome";
-
-// jeśli są dwie to wyświetl je
-
-// [] []
-
-// jeśli są trzy to wyświetl je
-
-// []
-// []
-// []
-
-// jeśli są cztery to wyświetl je
-
-// [] []
-// [] []
-
-// jeśli jest 5 to wyświetl je
-
-// [] [] []
-// [] []
-
-// jeśli jest 6 to wyświetl je
-
-// [] []
-// [] []
-// [] []
 
 const Quiz = ({
   navigation,
@@ -74,7 +48,7 @@ const Quiz = ({
     >
       <View style={{ height: "100%" }}>
         {quizState.status === "welcome" && <Welcome />}
-        {quizState.status === "quiz" && <Question />}
+        {quizState.status === "quiz" && <Form />}
         {quizState.status === "farwell" && <Farwell />}
       </View>
     </QuizContext.Provider>
