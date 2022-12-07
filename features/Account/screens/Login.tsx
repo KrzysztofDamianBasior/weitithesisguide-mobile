@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -14,11 +14,20 @@ import { List } from "react-native-paper";
 import { StackScreenProps } from "@react-navigation/stack";
 import { AccountStackParamList } from "../navigation";
 
+import { AuthContext } from "../../../shared/context/AuthContext";
+
 import * as Animatable from "react-native-animatable";
+
 const Login = ({
   route,
   navigation,
 }: StackScreenProps<AccountStackParamList, "SignIn">) => {
+  const [userInput, setUserInput] = useState<{
+    username: string;
+    password: string;
+  }>({ username: "", password: "" });
+  const { signIn } = useContext(AuthContext);
+
   return (
     <View style={{ width: "100%", height: "100%" }}>
       <Animatable.View
@@ -50,6 +59,10 @@ const Login = ({
               style={styles.input}
               placeholderTextColor="#443d5b"
               placeholder="Username"
+              value={userInput.username}
+              onChangeText={(text) =>
+                setUserInput((prev) => ({ ...prev, username: text }))
+              }
               autoCapitalize="none"
               keyboardType="email-address"
               textContentType="emailAddress"
@@ -63,10 +76,21 @@ const Login = ({
               placeholder="Password"
               secureTextEntry={true}
               autoCapitalize="none"
+              value={userInput.password}
+              onChangeText={(text) =>
+                setUserInput((prev) => ({ ...prev, password: text }))
+              }
             />
           </View>
           <Text style={styles.forgetPasswordText}>Forgot Password?</Text>
-          <TouchableOpacity style={styles.loginButton}>
+          <TouchableOpacity
+            style={styles.loginButton}
+            onPress={() => {
+              if (userInput.password !== "" && userInput.username !== "") {
+                signIn({ ...userInput });
+              }
+            }}
+          >
             <Text style={styles.loginButtonText}>sign in</Text>
           </TouchableOpacity>
           <Text style={styles.registerText}>

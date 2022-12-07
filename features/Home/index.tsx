@@ -84,7 +84,14 @@ const Home = ({
           }}
         >
           <TouchableOpacity onPress={() => navigation.navigate("Forum")}>
-            <View style={{ width: 150, height: 150, margin: 10 }}>
+            <View
+              style={{
+                width: 150,
+                height: 150,
+                margin: 10,
+                borderRadius: 20,
+              }}
+            >
               <ImageBackground
                 source={BackgroundForum}
                 resizeMode="cover"
@@ -92,6 +99,7 @@ const Home = ({
                   flex: 1,
                   justifyContent: "center",
                 }}
+                imageStyle={{ borderRadius: 20 }}
               >
                 <Text
                   style={{
@@ -112,6 +120,7 @@ const Home = ({
                 width: 150,
                 height: 150,
                 margin: 10,
+                borderRadius: 20,
               }}
             >
               <ImageBackground
@@ -121,6 +130,7 @@ const Home = ({
                   flex: 1,
                   justifyContent: "center",
                 }}
+                imageStyle={{ borderRadius: 20 }}
               >
                 <Text
                   style={{
@@ -143,7 +153,9 @@ const Home = ({
           }}
         >
           <TouchableOpacity onPress={() => navigation.navigate("Guide")}>
-            <View style={{ width: 150, height: 150, margin: 10 }}>
+            <View
+              style={{ width: 150, height: 150, margin: 10, borderRadius: 20 }}
+            >
               <ImageBackground
                 source={BackgroundGuide}
                 resizeMode="cover"
@@ -151,6 +163,7 @@ const Home = ({
                   flex: 1,
                   justifyContent: "center",
                 }}
+                imageStyle={{ borderRadius: 20 }}
               >
                 <Text
                   style={{
@@ -166,7 +179,9 @@ const Home = ({
           </TouchableOpacity>
 
           <TouchableOpacity onPress={() => navigation.navigate("Quiz")}>
-            <View style={{ width: 150, height: 150, margin: 10 }}>
+            <View
+              style={{ width: 150, height: 150, margin: 10, borderRadius: 20 }}
+            >
               <ImageBackground
                 source={BackgroundQuiz}
                 resizeMode="cover"
@@ -174,6 +189,7 @@ const Home = ({
                   flex: 1,
                   justifyContent: "center",
                 }}
+                imageStyle={{ borderRadius: 20 }}
               >
                 <Text
                   style={{

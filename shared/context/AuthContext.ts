@@ -68,16 +68,22 @@ export const authReducer = (
   }
 };
 
+export type signUpProps = { name: string; email: string; password: string };
+export type signInProps = {
+  username: string;
+  password: string;
+};
+
 export type AuthContextType = {
-  signIn: (userData: UserDataType) => void;
-  signUp: (userData: UserDataType) => void;
+  signIn: (userData: signInProps) => void;
+  signUp: (userData: signUpProps) => void;
   signOut: () => void;
   authState: AuthStateType;
 };
 
 export const AuthContext = React.createContext<AuthContextType>({
-  signIn: (userData: UserDataType) => {},
-  signUp: (userData: UserDataType) => {},
+  signIn: (userData: signInProps) => {},
+  signUp: (userData: signUpProps) => {},
   signOut: () => {},
   authState: authInitialState,
 });

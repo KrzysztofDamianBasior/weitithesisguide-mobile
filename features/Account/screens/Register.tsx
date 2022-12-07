@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useContext } from "react";
 import {
   StyleSheet,
   Text,
@@ -17,10 +17,19 @@ import { StackScreenProps } from "@react-navigation/stack";
 
 import * as Animatable from "react-native-animatable";
 
+import { AuthContext } from "../../../shared/context/AuthContext";
+
 const Register = ({
   route,
   navigation,
 }: StackScreenProps<AccountStackParamList, "Register">) => {
+  const [userInput, setUserInput] = useState<{
+    name: string;
+    email: string;
+    password: string;
+  }>({ email: "", name: "", password: "" });
+  const { signUp } = useContext(AuthContext);
+
   return (
     <View style={{ width: "100%", height: "100%" }}>
       <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()}>
@@ -54,6 +63,10 @@ const Register = ({
                   style={styles.input}
                   keyboardType="email-address"
                   textContentType="emailAddress"
+                  value={userInput.name}
+                  onChangeText={(text) =>
+                    setUserInput((prev) => ({ ...prev, username: text }))
+                  }
                 />
               </View>
               <View style={styles.inputContainer}>
@@ -62,6 +75,10 @@ const Register = ({
                   style={styles.input}
                   keyboardType="email-address"
                   textContentType="emailAddress"
+                  value={userInput.email}
+                  onChangeText={(text) =>
+                    setUserInput((prev) => ({ ...prev, email: text }))
+                  }
                 />
               </View>
               <View style={styles.inputContainer}>
@@ -70,16 +87,22 @@ const Register = ({
                   style={styles.input}
                   secureTextEntry={true}
                   textContentType="password"
+                  value={userInput.password}
+                  onChangeText={(text) =>
+                    setUserInput((prev) => ({ ...prev, password: text }))
+                  }
                 />
               </View>
               <View style={styles.inputContainer}>
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => signUp({ ...userInput })}
+                >
                   <Text style={styles.buttonText}>Register</Text>
                 </TouchableOpacity>
               </View>
             </ScrollView>
           </View>
-          {/* </View> */}
         </View>
       </TouchableWithoutFeedback>
     </View>
