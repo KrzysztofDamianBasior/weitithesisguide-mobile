@@ -2,7 +2,7 @@ import type { NoteType } from "../types";
 import { saveNote } from "./saveNote";
 
 export const createNote = async (): Promise<NoteType> => {
-  const currentDate = new Date().toLocaleDateString();
+  const currentDate = new Date().toLocaleString();
 
   const note: NoteType = {
     id: currentDate,

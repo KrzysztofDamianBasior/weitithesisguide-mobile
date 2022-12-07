@@ -12,10 +12,17 @@ import type { NotesType, NoteType } from "../types";
 import { getNotes } from "../utils";
 import { createNote } from "../utils/createNote";
 
+import type { CompositeScreenProps } from "@react-navigation/native";
+import { MaterialTopTabScreenProps } from "@react-navigation/material-top-tabs";
+import { NotesTabsParamList } from "../navigation/NotesTabs";
+
 export default function DeviceNotes({
   route,
   navigation,
-}: StackScreenProps<NotesStackParamList, "AllNotes">) {
+}: CompositeScreenProps<
+  MaterialTopTabScreenProps<NotesTabsParamList, "DeviceNotes">,
+  StackScreenProps<NotesStackParamList, "AllNotes">
+>) {
   const [notes, setNotes] = useState<NotesType>([]);
   const [isExtended, setIsExtended] = useState<boolean>(false);
 
@@ -30,16 +37,20 @@ export default function DeviceNotes({
     setNotes(notes);
   };
 
-  const renderNoteThumb = (note: NoteType) => (
-    <List.Item
-      key={note.id}
-      title={note.title}
-      description={`last modified on ${note.modificationDate}`}
-      left={() => <List.Icon icon="note-text" />}
-      onPress={() => navigation.navigate("Note", { note })}
-      // color={MD3Colors.tertiary70}
-    />
-  );
+  const renderNoteThumb = (note: NoteType) => {
+    // console.log(note);
+    return (
+      <List.Item
+        key={note.id}
+        title={note.title}
+        titleStyle={{ color: "#fff", fontSize: 20 }}
+        description={`last modified on ${note.modificationDate}`}
+        left={() => <List.Icon icon="note-text" />}
+        onPress={() => navigation.navigate("Note", { note })}
+        // color={MD3Colors.tertiary70}
+      />
+    );
+  };
 
   const addNewNote = async () => {
     const newNote = await createNote();

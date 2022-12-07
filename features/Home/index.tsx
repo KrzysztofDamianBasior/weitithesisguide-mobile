@@ -83,13 +83,17 @@ const Home = ({
             justifyContent: "center",
           }}
         >
-          <TouchableOpacity onPress={() => navigation.navigate("Forum")}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Forum")}
+            style={{ borderRadius: 20 }}
+          >
             <View
               style={{
                 width: 150,
                 height: 150,
                 margin: 10,
                 borderRadius: 20,
+                backgroundColor: "#000",
               }}
             >
               <ImageBackground
@@ -99,13 +103,14 @@ const Home = ({
                   flex: 1,
                   justifyContent: "center",
                 }}
-                imageStyle={{ borderRadius: 20 }}
+                imageStyle={{ borderRadius: 20, opacity: 0.2 }}
               >
                 <Text
                   style={{
                     color: paperTheme.colors.text,
                     fontSize: 25,
                     alignSelf: "center",
+                    opacity: 1,
                   }}
                 >
                   Forum
@@ -114,13 +119,17 @@ const Home = ({
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => navigation.navigate("Links")}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Links")}
+            style={{ borderRadius: 20 }}
+          >
             <View
               style={{
                 width: 150,
                 height: 150,
                 margin: 10,
                 borderRadius: 20,
+                backgroundColor: "#000",
               }}
             >
               <ImageBackground
@@ -130,7 +139,7 @@ const Home = ({
                   flex: 1,
                   justifyContent: "center",
                 }}
-                imageStyle={{ borderRadius: 20 }}
+                imageStyle={{ borderRadius: 20, opacity: 0.2 }}
               >
                 <Text
                   style={{
@@ -152,9 +161,18 @@ const Home = ({
             justifyContent: "center",
           }}
         >
-          <TouchableOpacity onPress={() => navigation.navigate("Guide")}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Guide")}
+            style={{ borderRadius: 20 }}
+          >
             <View
-              style={{ width: 150, height: 150, margin: 10, borderRadius: 20 }}
+              style={{
+                width: 150,
+                height: 150,
+                margin: 10,
+                borderRadius: 20,
+                backgroundColor: "#000",
+              }}
             >
               <ImageBackground
                 source={BackgroundGuide}
@@ -163,7 +181,7 @@ const Home = ({
                   flex: 1,
                   justifyContent: "center",
                 }}
-                imageStyle={{ borderRadius: 20 }}
+                imageStyle={{ borderRadius: 20, opacity: 0.2 }}
               >
                 <Text
                   style={{
@@ -178,9 +196,18 @@ const Home = ({
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity onPress={() => navigation.navigate("Quiz")}>
+          <TouchableOpacity
+            onPress={() => navigation.navigate("Quiz")}
+            style={{ borderRadius: 20 }}
+          >
             <View
-              style={{ width: 150, height: 150, margin: 10, borderRadius: 20 }}
+              style={{
+                width: 150,
+                height: 150,
+                margin: 10,
+                borderRadius: 20,
+                backgroundColor: "#000",
+              }}
             >
               <ImageBackground
                 source={BackgroundQuiz}
@@ -189,7 +216,7 @@ const Home = ({
                   flex: 1,
                   justifyContent: "center",
                 }}
-                imageStyle={{ borderRadius: 20 }}
+                imageStyle={{ borderRadius: 20, opacity: 0.2 }}
               >
                 <Text
                   style={{
